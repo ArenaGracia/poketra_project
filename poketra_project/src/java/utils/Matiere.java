@@ -5,27 +5,31 @@
  */
 package utils;
 
+import dbconnect.Dbconnect;
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.Statement;
-import dbconnect.*;
 
 /**
  *
  * @author Toky
  */
-public class Unite {
+public class Matiere {
     int id;
     String nom;
 
-    public Unite() {
+    public Matiere() {
+    }
+
+    public Matiere(int id, String nom) {
+        this.id = id;
+        this.nom = nom;
     }
 
     public int getId() {
         return id;
     }
 
-   public void setId(int id) {
+    public void setId(int id) {
         if (id < 0) {
             throw new IllegalArgumentException("L'ID ne peut pas être négatif.");
         }
@@ -36,14 +40,14 @@ public class Unite {
         return nom;
     }
 
-     public void setNom(String nom) {
-        if (nom == null || nom.trim().isEmpty()) {
+    public void setNom(String nom) {
+      if (nom == null || nom.trim().isEmpty()) {
             throw new IllegalArgumentException("Le nom ne peut pas être vide ou nul.");
         }
         this.nom = nom;
     }
     
-     public void insererUnite(Connection c) throws Exception{
+    public void insererMatiere(Connection c) throws Exception{
          Statement s=null;
          boolean isValid=false;
          try {
@@ -51,7 +55,7 @@ public class Unite {
                 c= Dbconnect.dbConnect();
                 isValid=true;
              }
-             String sql="INSERT INTO unite (nom) VALUES ('"+this.getNom()+"')";
+         String sql="INSERT INTO matiere (nom) VALUES ('"+this.getNom()+"')";
          s.executeUpdate(sql);
          } catch (Exception e) {
             e.printStackTrace();
@@ -65,4 +69,6 @@ public class Unite {
              }
          }
      }
+    
+    
 }

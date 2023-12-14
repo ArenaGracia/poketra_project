@@ -4,9 +4,17 @@
         <servlet-name>UniteController</servlet-name>
         <servlet-class>controller.UniteController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>MatiereController</servlet-name>
+        <servlet-class>controller.MatiereController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>UniteController</servlet-name>
         <url-pattern>/add_unite</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MatiereController</servlet-name>
+        <url-pattern>/MatiereController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
