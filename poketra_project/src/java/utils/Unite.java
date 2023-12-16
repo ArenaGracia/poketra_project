@@ -15,20 +15,23 @@ import dbconnect.*;
  * @author Toky
  */
 public class Unite {
-    int id;
+    String id;
     String nom;
+
+    public Unite(String id, String nom) {
+        setId(id);
+        setNom(nom);
+    }
 
     public Unite() {
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-   public void setId(int id) {
-        if (id < 0) {
-            throw new IllegalArgumentException("L'ID ne peut pas être négatif.");
-        }
+   public void setId(String id) throws IllegalArgumentException{
+        if (id == null || "".equals(id))throw new IllegalArgumentException("L'ID ne peut pas être négatif.");
         this.id = id;
     }
 
