@@ -11,6 +11,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import modele.Matiere;
+import modele.Unite;
 
 /**
  *
@@ -59,7 +61,19 @@ public class MatiereController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+       try {
+            String nom = (String) request.getParameter("matiere");
+            Matiere matiere =new Matiere();
+            matiere.setNom(nom);
+            matiere.insererMatiere(null);
+            request.setAttribute("message", "Insertion de matiere  réussite");
+        } catch (Exception e) {
+            request.setAttribute("message", e.getMessage());
+        }
+        finally
+        {
+            request.getRequestDispatcher("ajoutMatiere.jsp").forward(request, response);
+        }
     }
 
     /**

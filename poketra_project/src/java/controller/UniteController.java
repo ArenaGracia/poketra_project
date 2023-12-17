@@ -5,13 +5,16 @@
  */
 package controller;
 
+import dbconnect.Dbconnect;
 import java.io.IOException;
 import java.io.PrintWriter;
+import static java.lang.System.out;
+import java.sql.Connection;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import utils.Unite;
+import modele.Unite;
 
 /**
  *
@@ -31,19 +34,7 @@ public class UniteController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String nom = (String) request.getParameter("nom");
-        try {
-            Unite unite =new Unite();
-            unite.setNom(nom);
-            unite.insererUnite(null);
-            request.setAttribute("message", "Insertion de l'unite réussite");
-        } catch (Exception e) {
-            request.setAttribute("message", e.getMessage());
-        }
-        finally
-        {
-            request.getRequestDispatcher("ajoutUnite.jsp").forward(request, response);
-        }
+       
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -72,7 +63,19 @@ public class UniteController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+         try {
+            String nom = (String) request.getParameter("unite");
+            Unite unite =new Unite();
+            unite.setNom(nom);
+            unite.insererUnite(null);
+            request.setAttribute("message", "Insertion réussi");
+        } catch (Exception e) {
+            request.setAttribute("message", e.getMessage());
+        }
+        finally
+        {
+            request.getRequestDispatcher("./pages/admin/ajoutUnite.jsp").forward(request, response);
+        }
     }
 
     /**
