@@ -29,8 +29,8 @@
     <!-- partial:partials/_navbar.html -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-        <a class="navbar-brand brand-logo mr-5" href="#"><img src="<%= request.getContextPath() %>/assets/images/logo.svg" class="mr-2" alt="logo"/></a>
-        <a class="navbar-brand brand-logo-mini" href="#"><img src="<%= request.getContextPath() %>/assets/images/logo-mini.svg" alt="logo"/></a>
+        <a class="navbar-brand brand-logo mr-5" ><img src="<%= request.getContextPath() %>/assets/images/logo.svg" class="mr-2" alt="logo"/></a>
+        <a class="navbar-brand brand-logo-mini" ><img src="<%= request.getContextPath() %>/assets/images/logo-mini.svg" alt="logo"/></a>
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
         <div class="navbar-toggler navbar-toggler align-self-center " type="div">
@@ -45,30 +45,32 @@
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
               <i class="icon-layout menu-icon"></i>
-              <span class="menu-title">UI Elements</span>
+              <span class="menu-title">Ajouts</span>
               <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="<%= request.getContextPath() %>/assets/pages/ui-features/buttons.html">Buttons</a></li>
-                <li class="nav-item"> <a class="nav-link" href="<%= request.getContextPath() %>/assets/pages/ui-features/dropdowns.html">Dropdowns</a></li>
-                <li class="nav-item"> <a class="nav-link" href="<%= request.getContextPath() %>/assets/pages/ui-features/typography.html">Typography</a></li>
+                  <li class="nav-item"> <a class="nav-link" href="<%= request.getContextPath() %>/add_unite">Unité</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<%= request.getContextPath() %>/add_matiere">Matières</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<%= request.getContextPath() %>/add_look">Look</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<%= request.getContextPath() %>/add_matiere_look">Matières par look</a></li>
               </ul>
             </div>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
+              <i class="icon-columns menu-icon"></i>
+              <span class="menu-title">Listes</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="form-elements">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"><a class="nav-link" href="<%= request.getContextPath() %>/list_matiere">Matières par look</a></li>
+              </ul>
+            </div>
+          </li>
+          
 
-          <li class="nav-item">
-            <a class="nav-link" href="./ControllerStock">
-              <i class="icon-paper menu-icon"></i>
-              <span class="menu-title">Etat de stock</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="./ControllerForm">
-              <i class="icon-paper menu-icon"></i>
-              <span class="menu-title">Sortie de stock</span>
-            </a>
-          </li>
         </ul>
       </nav>
       <!-- partial -->

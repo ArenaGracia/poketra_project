@@ -2,11 +2,23 @@
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
         <servlet-name>UniteController</servlet-name>
-        <servlet-class>controller.UniteController</servlet-class>
+        <servlet-class>controller.unite.UniteController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>MatiereController</servlet-name>
-        <servlet-class>controller.MatiereController</servlet-class>
+        <servlet-class>controller.matiere.MatiereController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddMatiereLookController</servlet-name>
+        <servlet-class>controller.look.MatiereLookController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LookController</servlet-name>
+        <servlet-class>controller.look.LookController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListMatiereController</servlet-name>
+        <servlet-class>controller.matiere.ListMatiereController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>UniteController</servlet-name>
@@ -14,7 +26,19 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>MatiereController</servlet-name>
-        <url-pattern>/MatiereController</url-pattern>
+        <url-pattern>/add_matiere</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddMatiereLookController</servlet-name>
+        <url-pattern>/add_matiere_look</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LookController</servlet-name>
+        <url-pattern>/add_look</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListMatiereController</servlet-name>
+        <url-pattern>/list_matiere</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
