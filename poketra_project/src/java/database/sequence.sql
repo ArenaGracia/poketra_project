@@ -44,3 +44,16 @@ CREATE SEQUENCE matiere_unite_sequence
     MAXVALUE 999999
     CACHE 1;
 
+CREATE SEQUENCE taille_sequence
+    START 1
+    INCREMENT 1
+    MINVALUE 1
+    MAXVALUE 999999
+    CACHE 1;
+
+CREATE SEQUENCE type_sequence
+    START 1
+    INCREMENT 1
+    MINVALUE 1
+    MAXVALUE 999999
+    CACHE 1;

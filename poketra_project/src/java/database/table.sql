@@ -24,6 +24,13 @@ CREATE TABLE Look_matiere (
     FOREIGN KEY (id_matiere) references matiere(id_matiere) ,
     FOREIGN KEY (id_look) references look(id_look));
 
+CREATE TABLE taille (
+    id_taille VARCHAR(10) DEFAULT ('UNI') || LPAD(nextval('taille_sequence')::TEXT,4,'0') PRIMARY KEY, 
+    nom VARCHAR(225) NOT NULL);
+
+CREATE TABLE type (
+    id_type VARCHAR(10) DEFAULT ('UNI') || LPAD(nextval('type_sequence')::TEXT,4,'0') PRIMARY KEY, 
+    nom VARCHAR(225) NOT NULL);
 /* 
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
