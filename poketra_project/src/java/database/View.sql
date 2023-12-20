@@ -22,7 +22,18 @@ CREATE OR REPLACE VIEW v_matiere_look AS (
         LEFT JOIN v_matiere_unite vmu ON vmu.id_matiere=vml.id_matiere
 );
 
-SELECT *
-    FROM matiere m
-    LEFT JOIN v_matiere_look vml ON m.id_matiere=vml.id_matiere
-    LEFT JOIN look l ON l.id_look=vml.id_look;
+CREATE OR REPLACE VIEW v_produit1 AS (
+SELECT  m.nom,m.id_matiere,p.id_type,p.id,p.id_taille,dp.qte
+    FROM Detail_produit as dp  
+    JOIN matiere as m ON m.id_matiere=dp.id_matiere
+    JOIN Produit p ON p.id=dp.id_produit
+);
+
+
+CREATE OR REPLACE VIEW v_produit AS (
+SELECT  v1.nom as nom_matiere,v1.id_matiere,v1.id_type,ty.nom as nom_type,v1.id,v1.id_taille,ta.nom as nom_taille,v1.qte
+    FROM v_produit1 as v1  
+    JOIN type as ty ON v1.id_type=ty.id_type
+    JOIN taille ta ON ta.id_taille=v1.id_taille
+    
+);

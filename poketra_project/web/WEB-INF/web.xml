@@ -28,6 +28,14 @@
         <servlet-name>TypeController</servlet-name>
         <servlet-class>controller.type.TypeController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ListTypeTailleController</servlet-name>
+        <servlet-class>controller.look.ListTypeTailleController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListeMatiereProduitController</servlet-name>
+        <servlet-class>controller.matiere.ListeMatiereProduitController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>UniteController</servlet-name>
         <url-pattern>/add_unite</url-pattern>
@@ -50,11 +58,19 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>TailleController</servlet-name>
-        <url-pattern>/TailleController</url-pattern>
+        <url-pattern>/add_taille</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>TypeController</servlet-name>
-        <url-pattern>/TypeController</url-pattern>
+        <url-pattern>/add_type</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListTypeTailleController</servlet-name>
+        <url-pattern>/list_type_taille</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListeMatiereProduitController</servlet-name>
+        <url-pattern>/list_matiere_produit</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

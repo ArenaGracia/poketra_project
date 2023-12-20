@@ -53,7 +53,10 @@
                   <li class="nav-item"> <a class="nav-link" href="<%= request.getContextPath() %>/add_unite">Unité</a></li>
                 <li class="nav-item"> <a class="nav-link" href="<%= request.getContextPath() %>/add_matiere">Matières</a></li>
                 <li class="nav-item"> <a class="nav-link" href="<%= request.getContextPath() %>/add_look">Look</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<%= request.getContextPath() %>/add_taille">Taille</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<%= request.getContextPath() %>/add_type">Type</a></li>
                 <li class="nav-item"> <a class="nav-link" href="<%= request.getContextPath() %>/add_matiere_look">Matières par look</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<%= request.getContextPath() %>/list_type_taille">Ajouter produit par taille</a></li>
               </ul>
             </div>
           </li>

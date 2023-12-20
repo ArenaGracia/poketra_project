@@ -31,6 +31,23 @@ CREATE TABLE taille (
 CREATE TABLE type (
     id_type VARCHAR(10) DEFAULT ('UNI') || LPAD(nextval('type_sequence')::TEXT,4,'0') PRIMARY KEY, 
     nom VARCHAR(225) NOT NULL);
+
+CREATE TABLE Produit (
+    id VARCHAR(10) DEFAULT ('PRO') || LPAD(nextval('produit_sequence')::TEXT,4,'0') PRIMARY KEY,
+    id_type VARCHAR(10),
+    id_taille VARCHAR (10),
+    FOREIGN KEY (id_type) REFERENCES Type(id_type),
+    FOREIGN KEY (id_taille) REFERENCES Taille(id_taille)
+);
+
+CREATE TABLE Detail_Produit (
+    id VARCHAR(10) DEFAULT ('DTP') || LPAD(nextval('Detail_Produuit_sequence')::TEXT,4,'0') PRIMARY KEY,
+    id_produit VARCHAR(10),
+    id_matiere VARCHAR (10),
+    qte INT,
+    FOREIGN KEY (id_produit) REFERENCES Produit(id),
+    FOREIGN KEY (id_matiere) REFERENCES Matiere(id_matiere)
+);
 /* 
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates

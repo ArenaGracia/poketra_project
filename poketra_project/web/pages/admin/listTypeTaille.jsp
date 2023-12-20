@@ -17,7 +17,7 @@
     <div class="card">
       <div class="card-body">
             <h4 class="card-title">Liste des looks</h4>
-        <form class="forms-sample" action="<%= request.getContextPath() %>/list_type_taille" method="post">
+        <form class="forms-sample" action="<%= request.getContextPath() %>/list_type_taille" method="get">
               
           <div class="form-group">
             <label for="exampleInputPassword1">Type</label>

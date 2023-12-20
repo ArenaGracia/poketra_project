@@ -11,7 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import modele.Unite;
+import modele.Taille;
 
 /**
  *
@@ -61,7 +61,7 @@ public class TailleController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
          try {
-            String nom = request.getParameter("unite");
+            String nom = request.getParameter("taille");
             Taille taille =new Taille();
             taille.setNom(nom);
             taille.insererTaille(null);

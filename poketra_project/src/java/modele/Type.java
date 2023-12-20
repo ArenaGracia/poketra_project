@@ -45,7 +45,7 @@ public class Type {
         setNom(nom);
     }
         
-    public void insererLook(Connection c) throws Exception{
+    public void insererType(Connection c) throws Exception{
          Statement s=null;
          boolean isValid=false;
          try {

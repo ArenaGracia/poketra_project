@@ -45,7 +45,7 @@ public class Taille {
         setNom(nom);
     }
         
-    public void insererLook(Connection c) throws Exception{
+    public void insererTaille(Connection c) throws Exception{
          Statement s=null;
          boolean isValid=false;
          try {
