@@ -48,10 +48,8 @@ public class ListMatiereController extends HttpServlet {
         try{
             String idLook=request.getParameter("look");
             Look look=new Look();
-            look.setId(idLook);
-            ArrayList<Matiere> liste=look.getAllMatiere(null);
+            look=look.getById(idLook, null);
             request.setAttribute("look", look);
-            request.setAttribute("matieres", liste);
         }catch(Exception e){
             request.setAttribute("erreur", e.getMessage());
         }finally{

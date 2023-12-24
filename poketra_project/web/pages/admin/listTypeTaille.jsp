@@ -9,6 +9,8 @@
 <%
    ArrayList<Type> listeType=(ArrayList<Type>) request.getAttribute("types");
    ArrayList<Look> listeLook=(ArrayList<Look>) request.getAttribute("looks");
+   String message=(String) request.getAttribute("message");
+   String erreur=(String) request.getAttribute("erreur");
 %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -39,6 +41,16 @@
                 <% } %>
               </select>
           </div>
+          <%if(message != null){ %>
+            <div class="alert alert-success" role="alert">
+                <p><%= message %></p>
+            </div>
+          <%   } %>
+          <%if(erreur != null){ %>
+            <div class="alert alert-danger" role="alert">
+                <p><%= erreur %></p>
+            </div>
+          <%   } %>
           <input type="submit" value="OK" class="btn btn-primary mr-2" />
         </form>
       </div>

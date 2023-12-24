@@ -56,7 +56,7 @@
                 <li class="nav-item"> <a class="nav-link" href="<%= request.getContextPath() %>/add_taille">Taille</a></li>
                 <li class="nav-item"> <a class="nav-link" href="<%= request.getContextPath() %>/add_type">Type</a></li>
                 <li class="nav-item"> <a class="nav-link" href="<%= request.getContextPath() %>/add_matiere_look">Matières par look</a></li>
-                <li class="nav-item"> <a class="nav-link" href="<%= request.getContextPath() %>/list_type_taille">Ajouter produit par taille</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<%= request.getContextPath() %>/list_type_taille">Modèle et détails</a></li>
               </ul>
             </div>
           </li>
@@ -69,6 +69,7 @@
             <div class="collapse" id="form-elements">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"><a class="nav-link" href="<%= request.getContextPath() %>/list_matiere">Matières par look</a></li>
+                <li class="nav-item"><a class="nav-link" href="<%= request.getContextPath() %>/list_matiere_produit">Détails par matière</a></li>
               </ul>
             </div>
           </li>

@@ -57,13 +57,13 @@ CREATE SEQUENCE type_sequence
     MINVALUE 1
     MAXVALUE 999999
     CACHE 1;
-CREATE SEQUENCE produit_sequence
+CREATE SEQUENCE modele_sequence
     START 1
     INCREMENT 1
     MINVALUE 1
     MAXVALUE 999999
     CACHE 1;
-CREATE SEQUENCE Detail_Produuit_sequence
+CREATE SEQUENCE Detail_modele_sequence
     START 1
     INCREMENT 1
     MINVALUE 1

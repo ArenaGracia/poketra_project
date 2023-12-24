@@ -12,10 +12,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import modele.DetailProduit;
+import modele.DetailModele;
 import modele.Look;
 import modele.Matiere;
-import modele.Produit;
+import modele.Modele;
 import modele.Taille;
 import modele.Type;
 
@@ -42,51 +42,23 @@ public class ListeMatiereProduitController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        if(request.getParameter(("matiere"))!=null){
-            
+        try{
+            if(request.getParameter("matiere")!=null){
+                String idMatiere=request.getParameter("matiere");
+                DetailModele d=new DetailModele();
+                ArrayList<DetailModele> liste=d.getDetailByMatiere(idMatiere, null);
+                request.setAttribute("modeles", liste); 
+            }           
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally{
+            processRequest(request, response);
         }
-        processRequest(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String typ = request.getParameter("type");        
-        String look = request.getParameter("look");
-        String[] tailles = request.getParameterValues("taille");
-        try{
-            Type type=new Type();
-            type.setId(typ);
-            
-            for (String t : tailles) {
-                Taille taille= new Taille();
-                taille.setId(t);
-                String[] listeM=request.getParameterValues(t);
-                String[] liste=request.getParameterValues(t.concat("number"));
-                ArrayList<DetailProduit> listD=new ArrayList<DetailProduit>();
-                
-                for (int i=0;i<listeM.length;i++) {
-                    DetailProduit detail=new DetailProduit();
-                    Matiere matiere=new Matiere();
-                    matiere.setId(listeM[i]);
-                    detail.setMatiere(matiere);
-                    detail.setQuantite(Integer.valueOf(liste[i]));
-                    listD.add(detail);
-                }
-              
-                Produit p=new Produit();
-                p.setTaille(taille);  
-                p.setType(type);
-                p.setDetails(listD);
-                p.insererProduit(null);
-            }
-            
-        }catch(Exception e){
-            request.setAttribute("erreur", e.getMessage());
-            response.getWriter().println(e.getMessage());
-        }finally{
-            processRequest(request,response);
-        }
     }
 
 }

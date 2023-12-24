@@ -41,8 +41,7 @@ public class MatiereLookController extends HttpServlet {
             try{
                 String idLook=request.getParameter("look");
                 Look look=new Look();
-                look.setId(idLook);
-                look=look.getById(null);
+                look=look.getById(idLook,null);
                 request.setAttribute("look", look);
                 ArrayList<Matiere> liste=look.getExterneMatiere(null);
                 request.setAttribute("matieres", liste);
@@ -70,8 +69,8 @@ public class MatiereLookController extends HttpServlet {
             }
             Look look=new Look();
             look.setId(idLook);
-            look=look.getById(null);
-            look.insererListe(liste, null);
+            look.setMatieres(liste);
+            look.insererListe(null);
             request.setAttribute("message", "Insertion réussie");
         }catch(Exception e){
             request.setAttribute("erreur", e.getMessage());

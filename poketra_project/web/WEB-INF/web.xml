@@ -36,6 +36,10 @@
         <servlet-name>ListeMatiereProduitController</servlet-name>
         <servlet-class>controller.matiere.ListeMatiereProduitController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ModeleController</servlet-name>
+        <servlet-class>controller.modele.ModeleController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>UniteController</servlet-name>
         <url-pattern>/add_unite</url-pattern>
@@ -71,6 +75,10 @@
     <servlet-mapping>
         <servlet-name>ListeMatiereProduitController</servlet-name>
         <url-pattern>/list_matiere_produit</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ModeleController</servlet-name>
+        <url-pattern>/add_modele</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

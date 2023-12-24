@@ -46,81 +46,81 @@ public class Taille {
     }
         
     public void insererTaille(Connection c) throws Exception{
-         Statement s=null;
-         boolean isValid=false;
-         try {
-             if (c==null) {
-                c= Dbconnect.dbConnect();
-                isValid=true;
-             }
-             String sql="INSERT INTO Taille (nom) VALUES ('"+this.getNom()+"')";
-             System.out.println(sql);
-             s=c.createStatement();
-             s.executeUpdate(sql);
-         } catch (Exception e) {
-            e.printStackTrace();
-         }
-         finally{
-             if (s !=null) s.close();
-             if (isValid) c.close();
-         }
+        Statement s=null;
+        boolean isValid=false;
+        try {
+            if (c==null) {
+               c= Dbconnect.dbConnect();
+               isValid=true;
+            }
+            String sql="INSERT INTO Taille (nom) VALUES ('"+this.getNom()+"')";
+            System.out.println(sql);
+            s=c.createStatement();
+            s.executeUpdate(sql);
+        } catch (Exception e) {
+           e.printStackTrace();
+        }
+        finally{
+            if (s !=null) s.close();
+            if (isValid) c.close();
+        }
      }
     
     public Taille getById(Connection c) throws Exception{
-         Statement s=null;
-         ResultSet res=null;
-         boolean isValid=false;
-         Taille taille=null;
-         try {
-             if (c==null) {
-                c= Dbconnect.dbConnect();
-                isValid=true;
-             }
-             String sql="SELECT * FROM taille WHERE id_taille='"+this.getId()+"'";
-             s=c.createStatement();
-             res=s.executeQuery(sql);
-             while(res.next()){
-                 taille=new Taille(res.getString("id_taille"),res.getString("nom"));
-             }
-             
-         } catch (Exception e) {
-            e.printStackTrace();
-         }
-         finally{
-             if (res !=null) res.close();
-             if (s !=null) s.close();
-             if (isValid) c.close();
-         }
-         return taille;
-     }
+        Statement s=null;
+        ResultSet res=null;
+        boolean isValid=false;
+        Taille taille=null;
+        try {
+            if (c==null) {
+               c= Dbconnect.dbConnect();
+               isValid=true;
+            }
+            String sql="SELECT * FROM taille WHERE id_taille='"+this.getId()+"'";
+            s=c.createStatement();
+            res=s.executeQuery(sql);
+            while(res.next()){
+                taille=new Taille(res.getString("id_taille"),res.getString("nom"));
+            }
+
+        } catch (Exception e) {
+           e.printStackTrace();
+        }
+        finally{
+            if (res !=null) res.close();
+            if (s !=null) s.close();
+            if (isValid) c.close();
+        }
+        return taille;
+    }
      
     
     public ArrayList<Taille> getAllTaille(Connection c) throws Exception{
-         Statement s=null;
-         ResultSet res=null;
-         boolean isValid=false;
-         ArrayList<Taille> liste=new ArrayList<Taille>();
-         try {
-             if (c==null) {
-                c= Dbconnect.dbConnect();
-                isValid=true;
-             }
-             String sql="SELECT * FROM taille";
-             s=c.createStatement();
-             res=s.executeQuery(sql);
-             while(res.next()){
-                 Taille taille=new Taille(res.getString("id_taille"),res.getString("nom"));
-                 liste.add(taille);
-             }
-             
-         } catch (Exception e) {
-            e.printStackTrace();
-         }
-         finally{
-             if (res !=null) res.close();
-             if (s !=null) s.close();
-             if (isValid) c.close();
-         }
-         return liste;
-     }
+        Statement s=null;
+        ResultSet res=null;
+        boolean isValid=false;
+        ArrayList<Taille> liste=new ArrayList<Taille>();
+        try {
+            if (c==null) {
+               c= Dbconnect.dbConnect();
+               isValid=true;
+            }
+            String sql="SELECT * FROM taille";
+            s=c.createStatement();
+            res=s.executeQuery(sql);
+            while(res.next()){
+                Taille taille=new Taille(res.getString("id_taille"),res.getString("nom"));
+                liste.add(taille);
+            }
+
+        } catch (Exception e) {
+           e.printStackTrace();
+        }
+        finally{
+            if (res !=null) res.close();
+            if (s !=null) s.close();
+            if (isValid) c.close();
+        }
+        return liste;
+    }
 }

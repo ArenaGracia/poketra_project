@@ -5,8 +5,10 @@
  */
 package controller.look;
 
+import dbconnect.Dbconnect;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -45,13 +47,14 @@ public class ListTypeTailleController extends HttpServlet {
 
             if(request.getParameter("type")!=null && request.getParameter("look")!=null){
                try{
+                   Connection c=Dbconnect.dbConnect();
                     Taille taille=new Taille();
                     Look look=new Look();
                     String idType=request.getParameter("type");
                     String idLook=request.getParameter("look");
-                    look.setId(idLook);
-                    ArrayList<Taille> tailles= taille.getAllTaille(null);
-                    ArrayList<Matiere> matieres= look.getAllMatiere(null);
+                    look=look.getById(idLook, c);
+                    ArrayList<Taille> tailles= taille.getAllTaille(c);
+                    ArrayList<Matiere> matieres= look.getMatieres();
                     request.setAttribute("idLook", idLook);
                     request.setAttribute("idType", idType);
                     request.setAttribute("tailles", tailles);

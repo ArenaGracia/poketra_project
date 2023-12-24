@@ -12,8 +12,8 @@
     String idType=(String) request.getAttribute("idType");
     ArrayList<Taille> listeT=(ArrayList<Taille>) request.getAttribute("tailles");
     ArrayList<Matiere> listeU=(ArrayList<Matiere>) request.getAttribute("matieres");
-   String message=(String) request.getAttribute("message");
-   String erreur=(String) request.getAttribute("erreur");
+    String message=(String) request.getAttribute("message");
+    String erreur=(String) request.getAttribute("erreur");
 %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -22,7 +22,7 @@
     <div class="card">
       <div class="card-body">
         <h4 class="card-title">Liste taille</h4>
-            <form class="forms-sample" action="<%= request.getContextPath() %>/list_matiere_produit" method="post">
+            <form class="forms-sample" action="<%= request.getContextPath() %>/add_modele" method="post">
               <div class="form-group">
                   <input type="hidden" class="form-control" name="look" value="<%= idLook %>">
                   <input type="hidden" class="form-control" name="type" value="<%= idType %>">

@@ -9,7 +9,7 @@
 <%@page import="modele.Look"%>
 <%
     Look look=(Look) request.getAttribute("look");
-    ArrayList<Matiere> listeU=(ArrayList<Matiere>) request.getAttribute("matieres");
+    ArrayList<Matiere> listeU=look.getMatieres();
 %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

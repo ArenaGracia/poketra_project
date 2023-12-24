@@ -7,21 +7,29 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 
-public class Produit {
+public class Modele {
     String id; 
+    Look look;
     Type type;
     Taille taille;
-    ArrayList<DetailProduit> details;
+    ArrayList<DetailModele> details;
 
-    public ArrayList<DetailProduit> getDetails() {
+    public Look getLook() {
+        return look;
+    }
+
+    public void setLook(Look look) {
+        this.look = look;
+    }
+
+    public ArrayList<DetailModele> getDetails() {
         return details;
     }
 
-    public void setDetails(ArrayList<DetailProduit> details) {
+    public void setDetails(ArrayList<DetailModele> details) {
         this.details = details;
     }
-   
-
+  
     public String getId() {
         return id;
     }
@@ -49,17 +57,18 @@ public class Produit {
     
     
      //Contructors
-    public Produit(){}
-    public Produit(String id, Type type, Taille taille)throws Exception{
+    public Modele(){}
+    public Modele(String id, Type type, Taille taille,Look look)throws Exception{
         setId(id);
         setTaille(taille);
         setType(type);
+        setLook(look);
     }
     
     
     
     //Methods
-     public void insererProduit(Connection c) throws Exception{
+     public void insererModele(Connection c) throws Exception{
         Statement s=null;
         ResultSet res=null;
         boolean isValid=false;
@@ -69,7 +78,8 @@ public class Produit {
                isValid=true;
             }
             c.setAutoCommit(false);
-            String sql="INSERT INTO Produit (id_type, id_taille) VALUES (" +
+            String sql="INSERT INTO Modele (id_look, id_type, id_taille) VALUES (" +
+                        "'" + this.getLook().getId() + "'," +
                         "'" + this.getType().getId() + "'," +
                         "'" + this.getTaille().getId()+ "') returning id" ;
             System.out.println(sql);
@@ -97,8 +107,8 @@ public class Produit {
                isValid=true;
             }
             
-            for(DetailProduit dp:this.getDetails()){
-                String sql="INSERT INTO Detail_Produit (id_produit,id_matiere,qte) VALUES (" +
+            for(DetailModele dp:this.getDetails()){
+                String sql="INSERT INTO Detail_Modele (id_modele,id_matiere,qte) VALUES (" +
                         "'" + this.getId() + "','"+dp.getMatiere().getId()+"',"+dp.getQuantite()+")" ;
                 System.out.println(sql);
                 s=c.createStatement();
