@@ -40,6 +40,14 @@
         <servlet-name>ModeleController</servlet-name>
         <servlet-class>controller.modele.ModeleController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>MatierePrixController</servlet-name>
+        <servlet-class>controller.matiere.MatierePrixController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RechercheController</servlet-name>
+        <servlet-class>controller.modele.RechercheController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>UniteController</servlet-name>
         <url-pattern>/add_unite</url-pattern>
@@ -79,6 +87,14 @@
     <servlet-mapping>
         <servlet-name>ModeleController</servlet-name>
         <url-pattern>/add_modele</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MatierePrixController</servlet-name>
+        <url-pattern>/add_matiere_prix</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RechercheController</servlet-name>
+        <url-pattern>/recherche_modele</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

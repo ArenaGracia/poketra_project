@@ -40,6 +40,7 @@ public class ModeleController extends HttpServlet {
             type.setId(typ);
             Look look=new Look();
             look.setId(idLook);
+            double prix=0;
             
             for (String t : tailles) {
                 Taille taille= new Taille();
@@ -52,8 +53,10 @@ public class ModeleController extends HttpServlet {
                     DetailModele detail=new DetailModele();
                     Matiere matiere=new Matiere();
                     matiere.setId(listeM[i]);
+                    matiere=matiere.getMatiere(null);
                     detail.setMatiere(matiere);
-                    detail.setQuantite(Integer.valueOf(liste[i]));
+                   
+                    detail.setQuantite(Integer.valueOf(liste[i])); prix += matiere.getPrix()*detail.getQuantite();
                     listD.add(detail);
                 }
                 
@@ -62,6 +65,7 @@ public class ModeleController extends HttpServlet {
                 p.setType(type);
                 p.setLook(look);
                 p.setDetails(listD);
+                p.setPrixConfection(prix);
                 p.insererModele(null);
                 
                 request.setAttribute("message", "Insérer avec succès");

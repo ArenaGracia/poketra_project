@@ -187,14 +187,6 @@ public class Look {
             ArrayList<Matiere> all=m.getAllMatiere(c);
             ArrayList<Matiere> intersect=new ArrayList<Matiere>();
 
-
-            for (Matiere matiere : all) {
-                for (Matiere matiere1 : in) {
-                    if(matiere1.getId().equalsIgnoreCase(matiere.getId())) intersect.add(matiere);
-                }
-            }
-            
-            all.removeAll(intersect);
             liste=all;
             if(liste.size()==0) throw new Exception("Toutes les matières sont déjà dans ce look");
         }catch(Exception e){

@@ -20,6 +20,17 @@ public class Matiere {
     String id;
     String nom;
     Unite unite;
+    double prix;
+
+    public double getPrix() {
+        return prix;
+    }
+
+    public void setPrix(double prix) throws Exception {
+        if(prix<0) throw new Exception("La valeur du prix ne peut etre negative");
+        this.prix = prix;
+    }
+    
 
     //    Methods
     public void insererMatiere (Connection connection) throws Exception{
@@ -48,7 +59,59 @@ public class Matiere {
             if(isValid)connection.close();
         }
     }
-
+    
+    public void insererPrix (Connection connection) throws Exception{
+        Statement statement = null;
+        boolean isValid = false;
+        ResultSet resultSet = null;
+        try{
+            if(connection == null){
+                connection = Dbconnect.dbConnect();
+                isValid = true;
+            }
+            connection.setAutoCommit(false);
+            String query = "INSERT INTO Matiere_prix VALUES(default, '" + this.getId() + "',"+this.getPrix()+")";
+            statement = connection.createStatement();
+            statement.executeUpdate(query);
+            connection.commit();
+        }catch(Exception e){
+           throw e;
+        }finally{
+            if(resultSet != null)resultSet.close();
+            if(statement != null)statement.close();
+            if(isValid)connection.close();
+        }
+    }
+    public Matiere getMatiere(Connection c) throws Exception{
+         Statement s=null;
+         ResultSet res=null;
+         boolean isValid=false;
+         Matiere matiere=new Matiere();
+         try {
+             if (c==null) {
+                c= Dbconnect.dbConnect();
+                isValid=true;
+             }
+             String sql="SELECT * FROM v_Matiere_prix WHERE id_matiere='"+this.getId()+"'";
+             s=c.createStatement();
+             res=s.executeQuery(sql);
+             while(res.next()){
+                 Unite unite=new Unite(res.getString("id_unite"),res.getString("nom_unite"));
+                 matiere=new Matiere(res.getString("id_matiere"),res.getString("nom_matiere"),unite);
+                 matiere.setPrix(res.getDouble("prix"));
+             }
+             
+         } catch (Exception e) {
+            e.printStackTrace();
+         }
+         finally{
+             if (res !=null) res.close();
+             if (s !=null) s.close();
+             if (isValid) c.close();
+         }
+         return matiere;
+     }
+    
     public ArrayList<Matiere> getAllMatiere(Connection c) throws Exception{
          Statement s=null;
          ResultSet res=null;

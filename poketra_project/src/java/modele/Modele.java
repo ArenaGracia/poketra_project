@@ -12,6 +12,7 @@ public class Modele {
     Look look;
     Type type;
     Taille taille;
+    double prixConfection;
     ArrayList<DetailModele> details;
 
     public Look getLook() {
@@ -53,6 +54,14 @@ public class Modele {
     public void setTaille(Taille taille) {
         this.taille = taille;
     }
+
+    public double getPrixConfection() {
+        return prixConfection;
+    }
+
+    public void setPrixConfection(double prixConfection) {
+        this.prixConfection = prixConfection;
+    }
     
     
     
@@ -78,10 +87,11 @@ public class Modele {
                isValid=true;
             }
             c.setAutoCommit(false);
-            String sql="INSERT INTO Modele (id_look, id_type, id_taille) VALUES (" +
+            String sql="INSERT INTO Modele (id_look, id_type, id_taille,prix_confection) VALUES (" +
                         "'" + this.getLook().getId() + "'," +
                         "'" + this.getType().getId() + "'," +
-                        "'" + this.getTaille().getId()+ "') returning id" ;
+                        "'" + this.getTaille().getId()+ "',"+
+                        this.getPrixConfection()+") returning id" ;
             System.out.println(sql);
             s=c.createStatement();
             res=s.executeQuery(sql);
@@ -97,7 +107,44 @@ public class Modele {
             if (isValid) c.close();
         }
      }
-     
+      public ArrayList<Modele> getModelePrix(Connection connection,double min,double max) throws Exception{
+        Statement s=null;
+        ResultSet res=null;
+        boolean isValid=false;
+        ArrayList<Modele> liste=new ArrayList<Modele>();
+         try {
+             if (connection==null) {
+                connection= Dbconnect.dbConnect();
+                isValid=true;
+             }
+             String sql="SELECT * FROM v_modele_prix WHERE prix_confection BETWEEN "+min+" AND "+max+"";
+             System.out.println(sql);
+             s=connection.createStatement();
+             res=s.executeQuery(sql);
+             while(res.next()){
+                Modele modele=new Modele();
+                Matiere matiere=new Matiere();
+                Taille taille=new Taille(res.getString("id_taille"),res.getString("nom_taille"));
+                Type type=new Type(res.getString("id_type"),res.getString("nom_type"));
+                Look look=new Look(res.getString("id_look"),res.getString("nom_look"));
+                modele.setLook(look);
+                modele.setPrixConfection(res.getDouble("prix_confection"));
+                modele.setTaille(taille);
+                modele.setTaille(taille);
+                modele.setType(type);
+             
+                liste.add(modele);
+             }
+         } catch (Exception e) {
+            e.printStackTrace();
+         }
+         finally{
+             if (res !=null) res.close();
+             if (s !=null) s.close();
+             if (isValid) connection.close();
+         }
+         return liste;
+    }
     public void insererDetail(Connection c) throws Exception{
         Statement s=null;
         boolean isValid=false;
