@@ -11,7 +11,10 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <jsp:include page="headerAdmin.jsp" />
 
-<% if(liste!=null) { %>
+<div class="col-md-12 grid-margin stretch-card">
+<div class="card">
+    <div class="card-body">
+    <% if(liste!=null) { %>
             <div class="table-responsive">
               <table class="table">
                 <thead>
@@ -34,4 +37,8 @@
                 </tbody>
               </table>
         <% } %>
+            </div>
+    </div>
+</div>
+</div>
 <jsp:include page="footerAdmin.jsp" />

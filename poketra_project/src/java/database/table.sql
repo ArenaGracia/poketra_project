@@ -44,7 +44,7 @@ CREATE TABLE Modele (
 );
 
 CREATE TABLE Detail_Modele (
-    id VARCHAR(10) DEFAULT ('MDL') || LPAD(nextval('Detail_modele_sequence')::TEXT,4,'0') PRIMARY KEY,
+    id VARCHAR(10) DEFAULT ('DML') || LPAD(nextval('Detail_modele_sequence')::TEXT,4,'0') PRIMARY KEY,
     id_modele VARCHAR(10),
     id_matiere VARCHAR (10),
     qte INT,
@@ -53,7 +53,16 @@ CREATE TABLE Detail_Modele (
 );
 
 CREATE TABLE Matiere_prix (
-    id_matiere_prix VARCHAR(10) DEFAULT ('MDL') || LPAD(nextval('matiere_prix_sequence')::TEXT,4,'0') PRIMARY KEY,
+    id_matiere_prix VARCHAR(10) DEFAULT ('MTP') || LPAD(nextval('matiere_prix_sequence')::TEXT,4,'0') PRIMARY KEY,
     id_matiere VARCHAR(10),
-    prix DOUBLE PRECISION
+    prix DOUBLE PRECISION,
+    FOREIGN KEY (id_matiere) REFERENCES Matiere(id_matiere)
+);
+
+CREATE TABLE Modele_prix (
+    id_modele_prix VARCHAR(10) DEFAULT ('MDP') || LPAD(nextval('modele_prix_sequence')::TEXT,4,'0') PRIMARY KEY,
+    id_modele VARCHAR(10),
+    prix DOUBLE PRECISION,
+    date TIMESTAMP default CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_modele) REFERENCES Modele(id)
 );

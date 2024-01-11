@@ -76,3 +76,11 @@ CREATE SEQUENCE matiere_prix_sequence
     MINVALUE 1
     MAXVALUE 999999
     CACHE 1;
+
+
+CREATE SEQUENCE modele_prix_sequence
+    START 1
+    INCREMENT 1
+    MINVALUE 1
+    MAXVALUE 999999
+    CACHE 1;

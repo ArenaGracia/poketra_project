@@ -51,7 +51,9 @@ CREATE OR REPLACE VIEW v_modele_prix AS (
     JOIN taille tl ON tl.id_taille=m.id_taille
 );
 
-SELECT *
-    FROM v_modele_prix
-    WHERE prix_confection BETWEEN valeur_min AND valeur_max;
-  
+CREATE OR REPLACE view v_prix_modele AS(
+    SELECT v.id id,v.id_type,v.nom_type,v.id_look,v.nom_look,v.id_taille,v.nom_taille,sum(m.prix*qte) prix_confection 
+        FROM v_modele v
+        JOIN Matiere_prix m ON v.id_matiere=m.id_matiere
+    GROUP BY v.id,v.id_type,v.nom_type,v.id_look,v.nom_look,v.id_taille,v.nom_taille
+); 

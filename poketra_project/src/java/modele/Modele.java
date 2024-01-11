@@ -87,11 +87,10 @@ public class Modele {
                isValid=true;
             }
             c.setAutoCommit(false);
-            String sql="INSERT INTO Modele (id_look, id_type, id_taille,prix_confection) VALUES (" +
+            String sql="INSERT INTO Modele (id_look, id_type, id_taille) VALUES (" +
                         "'" + this.getLook().getId() + "'," +
                         "'" + this.getType().getId() + "'," +
-                        "'" + this.getTaille().getId()+ "',"+
-                        this.getPrixConfection()+") returning id" ;
+                        "'" + this.getTaille().getId()+ "') returning id" ;
             System.out.println(sql);
             s=c.createStatement();
             res=s.executeQuery(sql);
@@ -103,11 +102,35 @@ public class Modele {
            e.printStackTrace();
         }
         finally{
+            if (res !=null) res.close();
             if (s !=null) s.close();
             if (isValid) c.close();
         }
-     }
-      public ArrayList<Modele> getModelePrix(Connection connection,double min,double max) throws Exception{
+    }
+    
+    public void insererPrixModele(Connection connection) throws Exception{
+        Statement s=null;
+        ResultSet res=null;
+        boolean isValid=false;
+        try {
+            if (connection==null) {
+               connection= Dbconnect.dbConnect();
+               isValid=true;
+            }
+            String sql="INSERT INTO modele_prix VALUES (DEFAULT,'"+this.getId()+"',"+this.getPrixConfection()+")" ;
+            System.out.println(sql);
+            s.executeUpdate(sql);
+        } catch (Exception e) {
+           e.printStackTrace();
+        }
+        finally{
+            if (s !=null) s.close();
+            if (isValid) connection.close();
+        }       
+    }
+    
+    public ArrayList<Modele> getModelePrix(Connection connection,double min,double max) throws Exception{
+        if(min<0 || max<min) throw new Exception("L'intervallle de valeur est fausse");
         Statement s=null;
         ResultSet res=null;
         boolean isValid=false;
@@ -117,13 +140,14 @@ public class Modele {
                 connection= Dbconnect.dbConnect();
                 isValid=true;
              }
-             String sql="SELECT * FROM v_modele_prix WHERE prix_confection BETWEEN "+min+" AND "+max+"";
+             String sql="SELECT * FROM v_prix_modele WHERE prix_confection BETWEEN "+min+" AND "+max+"";
              System.out.println(sql);
              s=connection.createStatement();
              res=s.executeQuery(sql);
              while(res.next()){
                 Modele modele=new Modele();
                 Matiere matiere=new Matiere();
+                modele.setId(res.getString("id"));
                 Taille taille=new Taille(res.getString("id_taille"),res.getString("nom_taille"));
                 Type type=new Type(res.getString("id_type"),res.getString("nom_type"));
                 Look look=new Look(res.getString("id_look"),res.getString("nom_look"));

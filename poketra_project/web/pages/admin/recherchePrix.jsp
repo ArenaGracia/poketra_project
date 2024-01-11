@@ -3,6 +3,9 @@
     Created on : 9 janv. 2024, 14:35:57
     Author     : ASUS
 --%>
+<%
+    String erreur=(String) request.getAttribute("erreur");
+%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <jsp:include page="headerAdmin.jsp" />
     <div class="col-md-6 grid-margin stretch-card">
@@ -17,7 +20,12 @@
           <div class="form-group">
             <label for="exampleInputPassword1">Prix 2</label>
             <input type="text" class="form-control" name="max">
-          </div>             
+          </div>  
+          <%if(erreur != null){ %>
+            <div class="alert alert-danger" role="alert">
+                <p><%= erreur %></p>
+            </div>
+          <%   } %>           
           <input type="submit" value="Valider" class="btn btn-primary mr-2" />
         </form>
       </div>
