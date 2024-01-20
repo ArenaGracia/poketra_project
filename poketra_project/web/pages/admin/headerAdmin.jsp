@@ -58,6 +58,10 @@
                 <li class="nav-item"> <a class="nav-link" href="<%= request.getContextPath() %>/add_matiere_look">Matières par look</a></li>
                 <li class="nav-item"> <a class="nav-link" href="<%= request.getContextPath() %>/list_type_taille">Modèle et détails</a></li>
                 <li class="nav-item"> <a class="nav-link" href="<%= request.getContextPath() %>/add_matiere_prix">Prix d'une matière </a></li>
+                <li class="nav-item"> <a class="nav-link" href="<%= request.getContextPath() %>/add_matiere_stock">Stock d'une matiere</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<%= request.getContextPath() %>/add_fabrication">Fabrication</a></li>
+                <li class="nav-item"><a class="nav-link" href="<%= request.getContextPath() %>/add_specialite_modele">Specialités utiles</a></li>
+
               </ul>
             </div>
           </li>
@@ -72,6 +76,24 @@
                 <li class="nav-item"><a class="nav-link" href="<%= request.getContextPath() %>/list_matiere">Matières par look</a></li>
                 <li class="nav-item"><a class="nav-link" href="<%= request.getContextPath() %>/list_matiere_produit">Détails par matière</a></li>
                 <li class="nav-item"><a class="nav-link" href="<%= request.getContextPath() %>/recherche_modele">Rechercher</a></li>
+                <li class="nav-item"><a class="nav-link" href="<%= request.getContextPath() %>/recherche_benefice">Bénéfice</a></li>
+                <li class="nav-item"><a class="nav-link" href="<%= request.getContextPath() %>/stock_matiere">Matières</a></li>
+              </ul>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#ui-basics" aria-expanded="false" aria-controls="form-elements">
+              <i class="icon-columns menu-icon"></i>
+              <span class="menu-title">RH</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="form-elements">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"><a class="nav-link" href="<%= request.getContextPath() %>/add_genre">Ajout Genre</a></li>
+                <li class="nav-item"><a class="nav-link" href="<%= request.getContextPath() %>/add_specialite">Ajout Specialité avec salaire</a></li>
+                <li class="nav-item"><a class="nav-link" href="<%= request.getContextPath() %>/add_employe">Ajout Employé</a></li>
+                <li class="nav-item"><a class="nav-link" href="<%= request.getContextPath() %>/add_prix_vente">Ajouter un prix</a></li>
               </ul>
             </div>
           </li>

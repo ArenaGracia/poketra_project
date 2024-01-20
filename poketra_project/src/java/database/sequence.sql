@@ -84,3 +84,59 @@ CREATE SEQUENCE modele_prix_sequence
     MINVALUE 1
     MAXVALUE 999999
     CACHE 1;
+
+CREATE SEQUENCE stock_sequence
+    START 1
+    INCREMENT 1
+    MINVALUE 1
+    MAXVALUE 999999
+    CACHE 1;
+
+CREATE SEQUENCE fabrication_sequence
+    START 1
+    INCREMENT 1
+    MINVALUE 1
+    MAXVALUE 999999
+    CACHE 1;
+
+CREATE SEQUENCE genre_sequence
+    START 1
+    INCREMENT 1
+    MINVALUE 1
+    MAXVALUE 999999
+    CACHE 1;
+
+CREATE SEQUENCE specialite_sequence
+    START 1
+    INCREMENT 1
+    MINVALUE 1
+    MAXVALUE 999999
+    CACHE 1;
+
+CREATE SEQUENCE employe_specialite_sequence
+    START 1
+    INCREMENT 1
+    MINVALUE 1
+    MAXVALUE 999999
+    CACHE 1;
+
+CREATE SEQUENCE employe_sequence
+    START 1
+    INCREMENT 1
+    MINVALUE 1
+    MAXVALUE 999999
+    CACHE 1;
+
+CREATE SEQUENCE modele_specialite_sequence
+    START 1
+    INCREMENT 1
+    MINVALUE 1
+    MAXVALUE 999999
+    CACHE 1;
+
+CREATE SEQUENCE modele_prix_vente_sequence
+    START 1
+    INCREMENT 1
+    MINVALUE 1
+    MAXVALUE 999999
+    CACHE 1;

@@ -12,18 +12,28 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import modele.Look;
 import modele.Modele;
+import modele.Specialite;
+import modele.Type;
 
 /**
  *
- * @author ASUS
+ * @author ITU
  */
-public class RechercheController extends HttpServlet {
-    
+public class ChoixModeleController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-            request.getRequestDispatcher("./pages/admin/recherchePrix.jsp").forward(request, response);
+        try{
+            Modele modele=new Modele();
+            ArrayList<Modele> liste=modele.getModeleSansTaille(null);
+            request.setAttribute("modeles", liste);
+        }catch(Exception e){
+            
+        }finally{
+            request.getRequestDispatcher("./pages/admin/choixModel.jsp").forward(request, response);
+        }
     }
 
     @Override
@@ -35,32 +45,17 @@ public class RechercheController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
         try{
-                double min=Double.valueOf(request.getParameter("min"));
-                double max=Double.valueOf(request.getParameter("max"));
-                Modele mod=new Modele();
-                ArrayList<Modele> listMod= mod.getModelePrix(null,min,max);
-                System.out.println(listMod.size());
-                request.setAttribute("modeles",listMod);
-        }
-        catch(Exception e){
-            request.setAttribute("erreur",e.getMessage());
+            String modele=request.getParameter("modele");
+            request.setAttribute("modele", modele);
+            Specialite specialite=new Specialite();
+            ArrayList<Specialite> liste=specialite.getAll(null);
+            request.setAttribute("specs", liste);
+        }catch(Exception e){
+            e.printStackTrace();
             processRequest(request, response);
-        }
-        finally{
-            request.getRequestDispatcher("./pages/admin/listSac.jsp").forward(request, response);                  
+        }finally{
+            request.getRequestDispatcher("./pages/admin/ajoutModeleSpecialite.jsp").forward(request, response);
         }
     }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
 }

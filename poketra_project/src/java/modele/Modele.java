@@ -13,7 +13,48 @@ public class Modele {
     Type type;
     Taille taille;
     double prixConfection;
+    double prixVente;
+    double prixRevient;
+    double benefice;
     ArrayList<DetailModele> details;
+    ArrayList<ModeleSpecialite> modeleSpecialites;
+
+    public double getPrixRevient() {
+        return prixRevient;
+    }
+
+    public void setPrixRevient(double prixRevient) {
+        this.prixRevient = prixRevient;
+    }
+
+    
+    public double getBenefice() {
+        return benefice;
+    }
+
+    public void setBenefice(double benefice) {
+        this.benefice = benefice;
+    }
+
+    
+    public ArrayList<ModeleSpecialite> getModeleSpecialites() {
+        return modeleSpecialites;
+    }
+
+    public void setModeleSpecialites(ArrayList<ModeleSpecialite> modeleSpecialites) {
+        this.modeleSpecialites = modeleSpecialites;
+    }
+
+    public double getPrixVente() {
+        return prixVente;
+    }
+
+    public void setPrixVente(double prixVente) throws Exception {
+        if(prixVente<0) throw new Exception("Prix de vente non valide");
+        this.prixVente = prixVente;
+    }
+    
+    
 
     public Look getLook() {
         return look;
@@ -73,8 +114,7 @@ public class Modele {
         setType(type);
         setLook(look);
     }
-    
-    
+      
     
     //Methods
      public void insererModele(Connection c) throws Exception{
@@ -99,7 +139,7 @@ public class Modele {
             c.commit();
         } catch (Exception e) {
             c.rollback();
-           e.printStackTrace();
+            throw e;
         }
         finally{
             if (res !=null) res.close();
@@ -108,25 +148,51 @@ public class Modele {
         }
     }
     
-    public void insererPrixModele(Connection connection) throws Exception{
+    public void insererPrixVenteModele(Connection connection) throws Exception{
         Statement s=null;
-        ResultSet res=null;
         boolean isValid=false;
         try {
             if (connection==null) {
                connection= Dbconnect.dbConnect();
                isValid=true;
             }
-            String sql="INSERT INTO modele_prix VALUES (DEFAULT,'"+this.getId()+"',"+this.getPrixConfection()+")" ;
+            this.getPrixRevient(connection);
+            if(this.getPrixRevient()>this.getPrixVente()) throw new Exception("Voulez-vous entrer dans une perte ou quoi? Vous devez entrer au moins "+this.getPrixRevient());
+            String sql="INSERT INTO modele_prix_vente VALUES (DEFAULT,'"+this.getId()+"',"+this.getPrixVente()+",DEFAULT)" ;
+            s=connection.createStatement();
             System.out.println(sql);
             s.executeUpdate(sql);
         } catch (Exception e) {
-           e.printStackTrace();
+           throw e;
         }
         finally{
             if (s !=null) s.close();
             if (isValid) connection.close();
         }       
+    }
+    
+    public void getPrixRevient(Connection con) throws Exception{
+        ResultSet res=null;
+        Statement stmt=null;
+        boolean estValid=false;
+        try{
+            if(con==null){
+                estValid=true;
+                con=Dbconnect.dbConnect();
+            }
+            String sql="SELECT*FROM v_prix_revient WHERE id='"+this.getId()+"'";
+            stmt=con.createStatement();
+            res=stmt.executeQuery(sql);
+            while(res.next()){
+                this.setPrixRevient(res.getDouble("prix_revient"));
+            }
+        }catch(Exception e){
+            throw e;
+        }finally{
+            if(res!=null) res.close();
+            if(stmt!=null) stmt.close();
+            if(estValid) con.close();
+        }
     }
     
     public ArrayList<Modele> getModelePrix(Connection connection,double min,double max) throws Exception{
@@ -160,7 +226,7 @@ public class Modele {
                 liste.add(modele);
              }
          } catch (Exception e) {
-            e.printStackTrace();
+            throw e;
          }
          finally{
              if (res !=null) res.close();
@@ -169,6 +235,86 @@ public class Modele {
          }
          return liste;
     }
+
+    public ArrayList<Modele> getModeleBenefice(Connection connection,double min,double max) throws Exception{
+        if(max<min) throw new Exception("L'intervallle de valeur est fausse");
+        Statement s=null;
+        ResultSet res=null;
+        boolean isValid=false;
+        ArrayList<Modele> liste=new ArrayList<Modele>();
+         try {
+             if (connection==null) {
+                connection= Dbconnect.dbConnect();
+                isValid=true;
+             }
+             String sql="SELECT * FROM v_modele_benefice WHERE benefice BETWEEN "+min+" AND "+max+"";
+             System.out.println(sql);
+             s=connection.createStatement();
+             res=s.executeQuery(sql);
+             while(res.next()){
+                Modele modele=new Modele();
+                modele.setId(res.getString("id"));
+                Taille taille=new Taille(res.getString("id_taille"),res.getString("nom_taille"));
+                Type type=new Type(res.getString("id_type"),res.getString("nom_type"));
+                Look look=new Look(res.getString("id_look"),res.getString("nom_look"));
+                modele.setLook(look);
+                modele.setBenefice(res.getDouble("benefice"));
+                modele.setTaille(taille);
+                modele.setTaille(taille);
+                modele.setType(type);
+             
+                liste.add(modele);
+             }
+         } catch (Exception e) {
+            throw e;
+         }
+         finally{
+             if (res !=null) res.close();
+             if (s !=null) s.close();
+             if (isValid) connection.close();
+         }
+         return liste;
+    }
+    
+    public ArrayList<Modele> getModeles(Connection connection) throws Exception{
+        Statement s=null;
+        ResultSet res=null;
+        boolean isValid=false;
+        ArrayList<Modele> liste=new ArrayList<Modele>();
+         try {
+             if (connection==null) {
+                connection= Dbconnect.dbConnect();
+                isValid=true;
+             }
+             String sql="SELECT * FROM v_prix_modele";
+             System.out.println(sql);
+             s=connection.createStatement();
+             res=s.executeQuery(sql);
+             while(res.next()){
+                Modele modele=new Modele();
+                modele.setId(res.getString("id"));
+                Taille taille=new Taille(res.getString("id_taille"),res.getString("nom_taille"));
+                Type type=new Type(res.getString("id_type"),res.getString("nom_type"));
+                Look look=new Look(res.getString("id_look"),res.getString("nom_look"));
+                modele.setLook(look);
+                modele.setPrixConfection(res.getDouble("prix_confection"));
+                modele.setTaille(taille);
+                modele.setTaille(taille);
+                modele.setType(type);
+             
+                liste.add(modele);
+             }
+         } catch (Exception e) {
+            throw e;
+         }
+         finally{
+             if (res !=null) res.close();
+             if (s !=null) s.close();
+             if (isValid) connection.close();
+         }
+         return liste;
+    }
+
     public void insererDetail(Connection c) throws Exception{
         Statement s=null;
         boolean isValid=false;
@@ -187,7 +333,7 @@ public class Modele {
             }
             
         } catch (Exception e) {
-           e.printStackTrace();
+           throw e;
         }
         finally{
             if (s !=null) s.close();
@@ -195,5 +341,143 @@ public class Modele {
         }        
     }
     
+    public Modele getModele(Connection c) throws Exception{
+        Statement s=null;
+        ResultSet res=null;
+        boolean isValid=false;
+        Type type=null;
+        Look look=null;
+        Taille taille=null;
+        ArrayList<DetailModele> liste=new ArrayList<DetailModele>();
+        Modele modele=null;
+        try {
+            if (c==null) {
+               c= Dbconnect.dbConnect();
+               isValid=true;
+            }
+            String sql="SELECT * FROM v_modele WHERE id='"+this.getId()+"'";
+            System.out.println(sql);
+            s=c.createStatement();
+            res=s.executeQuery(sql);
+            while(res.next()){
+                modele=new Modele();
+                Matiere matiere=new Matiere();
+                matiere.setNom(res.getString("nom_matiere"));
+                matiere.setId(res.getString("id_matiere"));
+                modele.setId(id);
+                taille=new Taille(res.getString("id_taille"),res.getString("nom_taille"));
+                type=new Type(res.getString("id_type"),res.getString("nom_type"));
+                look=new Look(res.getString("id_look"),res.getString("nom_look"));
+                modele.setLook(look);
+                modele.setTaille(taille);
+                modele.setTaille(taille);
+                modele.setType(type);
+                DetailModele d=new DetailModele(res.getInt("qte"),matiere,modele);
+                liste.add(d);
+            }            
+        } catch (Exception e) {
+           throw e;
+        }
+        finally{
+            if (res !=null) res.close();
+            if (s !=null) s.close();
+            if (isValid) c.close();
+        }
+        modele.setDetails(liste);
+        return modele;
+    } 
+
     
+    public void insererModeleSpecialite(Connection connection) throws Exception{
+        Statement s=null;
+        ResultSet res=null;
+        boolean isValid=false;
+        try {
+            if (connection==null) {
+               connection= Dbconnect.dbConnect();
+               isValid=true;
+            }
+            s=connection.createStatement();
+            for (ModeleSpecialite modeleSpecialite : this.getModeleSpecialites()) {
+                String sql="INSERT INTO Modele_specialite VALUES (DEFAULT,'"+modeleSpecialite.getModele().getId()+"','"+modeleSpecialite.getSpecialite().getId()+"',"+modeleSpecialite.getNombre()+","+modeleSpecialite.getDuree()+")" ;
+                System.out.println(sql);
+                s.executeUpdate(sql);                
+            }
+            
+        } catch (Exception e) {
+           throw e;
+        }
+        finally{
+            if (s !=null) s.close();
+            if (isValid) connection.close();
+        }       
+    }
+ 
+    
+    public ArrayList<Modele> getModeleByLookAndType(Connection connection) throws Exception{
+        ArrayList<Modele> list =new ArrayList<Modele>();
+        Statement s=null;
+        ResultSet res=null;
+        Boolean isValid=false;
+        try{
+            if (connection == null) {
+                connection=Dbconnect.dbConnect();
+                isValid=true;
+            }
+            String sql="SELECT * FROM v_modele_sans_detail WHERE id_look = '"+this.getLook().getId()+"' AND id_type = '"+this.getType().getId()+"'";
+            s=connection.createStatement();
+            res=s.executeQuery(sql);
+            while(res.next()){
+               Look look1=new Look(res.getString("id_look"), res.getString("nom_look"));
+               Type type1=new Type(res.getString("id_type"), res.getString("nom_type"));
+               Taille taille1=new Taille(res.getString("id_taille"), res.getString("nom_taille"));
+               
+               Modele modele =new Modele(res.getString("id"), type1, taille1, look1);
+               
+               list.add(modele);
+             }
+        }
+        catch(Exception ex){
+             throw ex;
+        }
+          finally{
+             if (res !=null) res.close();
+             if (s !=null) s.close();
+             if (isValid) connection.close();
+         }
+        return list;
+    }
+ 
+    public ArrayList<Modele> getModeleSansTaille(Connection connection) throws Exception{
+        ArrayList<Modele> list =new ArrayList<Modele>();
+        Statement s=null;
+        ResultSet res=null;
+        Boolean isValid=false;
+        try{
+            if (connection == null) {
+                connection=Dbconnect.dbConnect();
+                isValid=true;
+            }
+            String sql="SELECT * FROM v_modele_sans_taille ";
+            s=connection.createStatement();
+            res=s.executeQuery(sql);
+            while(res.next()){
+               Look look1=new Look(res.getString("id_look"), res.getString("nom_look"));
+               Type type1=new Type(res.getString("id_type"), res.getString("nom_type"));
+               Modele modele=new Modele();
+               modele.setLook(look1);
+               modele.setType(type1);
+               list.add(modele);
+             }
+        }
+        catch(Exception ex){
+              throw ex;
+        }
+          finally{
+             if (res !=null) res.close();
+             if (s !=null) s.close();
+             if (isValid) connection.close();
+         }
+        return list;
+    }
 }

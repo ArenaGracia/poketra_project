@@ -16,14 +16,14 @@ import modele.Modele;
 
 /**
  *
- * @author ASUS
+ * @author ITU
  */
-public class RechercheController extends HttpServlet {
-    
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+public class RechercheBeneficeController extends HttpServlet {
+
+        protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-            request.getRequestDispatcher("./pages/admin/recherchePrix.jsp").forward(request, response);
+            request.getRequestDispatcher("./pages/admin/rechercheBenefice.jsp").forward(request, response);
     }
 
     @Override
@@ -40,7 +40,7 @@ public class RechercheController extends HttpServlet {
                 double min=Double.valueOf(request.getParameter("min"));
                 double max=Double.valueOf(request.getParameter("max"));
                 Modele mod=new Modele();
-                ArrayList<Modele> listMod= mod.getModelePrix(null,min,max);
+                ArrayList<Modele> listMod= mod.getModeleBenefice(null,min,max);
                 System.out.println(listMod.size());
                 request.setAttribute("modeles",listMod);
         }
@@ -49,18 +49,7 @@ public class RechercheController extends HttpServlet {
             processRequest(request, response);
         }
         finally{
-            request.getRequestDispatcher("./pages/admin/listSac.jsp").forward(request, response);                  
+            request.getRequestDispatcher("./pages/admin/listSacByBenefice.jsp").forward(request, response);                  
         }
     }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
 }

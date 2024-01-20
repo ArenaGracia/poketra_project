@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller.taille;
+package controller.specialite;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -11,18 +11,17 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import modele.Taille;
+import modele.Specialite;
 
 /**
  *
- * @author Toky
+ * @author ITU
  */
-public class TailleController extends HttpServlet {
-
+public class SpecialiteController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-       request.getRequestDispatcher("./pages/admin/ajoutTaille.jsp").forward(request, response);
+        request.getRequestDispatcher("./pages/admin/ajoutSpecialite.jsp").forward(request, response);
     }
 
     @Override
@@ -34,11 +33,13 @@ public class TailleController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         try {
-            String nom = request.getParameter("taille");
-            Taille taille =new Taille();
-            taille.setNom(nom);
-            taille.insererTaille(null);
+        try {
+            String nom = request.getParameter("specialite");
+            double salaire=Double.valueOf(request.getParameter("salaire"));
+            Specialite specialite =new Specialite();
+            specialite.setNom(nom);
+            specialite.setSalaire(salaire);
+            specialite.inserer(null);
             request.setAttribute("message", "Insertion réussi");
         } catch (Exception e) {
             request.setAttribute("erreur", e.getMessage());
@@ -47,15 +48,4 @@ public class TailleController extends HttpServlet {
             processRequest(request,response);
         }
     }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
 }
