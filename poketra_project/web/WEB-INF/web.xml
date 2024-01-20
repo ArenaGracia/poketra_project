@@ -88,6 +88,10 @@
         <servlet-name>ChoixModeleController</servlet-name>
         <servlet-class>controller.modele.ChoixModeleController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SpecialitePrixController</servlet-name>
+        <servlet-class>controller.specialite.SpecialitePrixController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>UniteController</servlet-name>
         <url-pattern>/add_unite</url-pattern>
@@ -175,6 +179,10 @@
     <servlet-mapping>
         <servlet-name>ChoixModeleController</servlet-name>
         <url-pattern>/add_specialite_modele</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SpecialitePrixController</servlet-name>
+        <url-pattern>/add_specialite_prix</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
