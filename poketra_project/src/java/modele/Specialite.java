@@ -84,7 +84,26 @@ public class Specialite {
                 con=Dbconnect.dbConnect();
                 estValid=true;
             }
-            String sql="INSERT INTO Specialite VALUES(DEFAULT,'"+this.getNom()+"',"+this.getSalaire()+")";
+            String sql="INSERT INTO Specialite VALUES(DEFAULT,'"+this.getNom()+"')";
+            stmt=con.createStatement();
+            stmt.executeUpdate(sql);
+        }catch(Exception e){
+            throw e;
+        }finally{
+            if(stmt!=null) stmt.close();
+            if(estValid) con.close();
+        }
+    }
+    
+        public void insererSalaire(Connection con) throws Exception{
+        Statement stmt=null;
+        boolean estValid=false; 
+        try{
+            if(con==null){
+                con=Dbconnect.dbConnect();
+                estValid=true;
+            }
+            String sql="INSERT INTO Specialite_salaire VALUES(DEFAULT,'"+this.getNom()+"',"+this.getSalaire()+",DEFAULT)";
             stmt=con.createStatement();
             stmt.executeUpdate(sql);
         }catch(Exception e){

@@ -43,8 +43,8 @@ public class SpecialitePrixController extends HttpServlet {
       try{
         double price = Double.valueOf(request.getParameter("salaire"));
         String idSpec= request.getParameter("specialite");
-       Specialite spec=new Specialite();
-       spec.setId(idSpec);
+        Specialite spec=new Specialite();
+        spec.setId(idSpec);
         spec.setSalaire(price);
         spec.insererSalaire(null);
         request.setAttribute("message","insertion reussi");

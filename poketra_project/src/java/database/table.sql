@@ -92,7 +92,14 @@ CREATE TABLE Employe(
 CREATE TABLE Specialite(
     id_specialite VARCHAR(10) DEFAULT ('SPC') || LPAD(nextval('specialite_sequence')::TEXT,4,'0') PRIMARY KEY,
     nom VARCHAR(20),
-    salaire DOUBLE PRECISION
+);
+
+CREATE TABLE Specialite_Salaire(
+    id_specialite_salaire VARCHAR(10) DEFAULT ('SAL') || LPAD(nextval('specialite_salaire_sequence')::TEXT,4,'0') PRIMARY KEY,
+    id_specialite VARCHAR(10),
+    salaire_heure DOUBLE PRECISION,
+    date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_specialite) REFERENCES Specialite(id_specialite)
 );
 
 CREATE TABLE Employe_specialite(
@@ -108,7 +115,8 @@ CREATE TABLE Modele_specialite (
     id_modele VARCHAR(10),
     id_specialite VARCHAR(10),
     nombre INTEGER,
-    duree DOUBLE PRECISION,
+    duree_mn DOUBLE PRECISION,
+    date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (id_modele) REFERENCES Modele(id),
     FOREIGN KEY (id_Specialite) REFERENCES Specialite(id_specialite)
 );

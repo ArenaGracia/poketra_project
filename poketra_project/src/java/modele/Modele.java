@@ -399,7 +399,7 @@ public class Modele {
             }
             s=connection.createStatement();
             for (ModeleSpecialite modeleSpecialite : this.getModeleSpecialites()) {
-                String sql="INSERT INTO Modele_specialite VALUES (DEFAULT,'"+modeleSpecialite.getModele().getId()+"','"+modeleSpecialite.getSpecialite().getId()+"',"+modeleSpecialite.getNombre()+","+modeleSpecialite.getDuree()+")" ;
+                String sql="INSERT INTO Modele_specialite VALUES (DEFAULT,'"+modeleSpecialite.getModele().getId()+"','"+modeleSpecialite.getSpecialite().getId()+"',"+modeleSpecialite.getNombre()+","+modeleSpecialite.getDuree()+",default)" ;
                 System.out.println(sql);
                 s.executeUpdate(sql);                
             }

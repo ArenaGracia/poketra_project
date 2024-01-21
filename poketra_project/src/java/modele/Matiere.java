@@ -70,7 +70,7 @@ public class Matiere {
                 isValid = true;
             }
             connection.setAutoCommit(false);
-            String query = "INSERT INTO Matiere_prix VALUES(default, '" + this.getId() + "',"+this.getPrix()+")";
+            String query = "INSERT INTO Matiere_prix VALUES(default, '" + this.getId() + "',"+this.getPrix()+",default)";
             statement = connection.createStatement();
             statement.executeUpdate(query);
             connection.commit();
