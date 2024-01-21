@@ -46,7 +46,7 @@ public class SpecialitePrixController extends HttpServlet {
        Specialite spec=new Specialite();
        spec.setId(idSpec);
         spec.setSalaire(price);
-        spec.inserer(null);
+        spec.insererSalaire(null);
         request.setAttribute("message","insertion reussi");
      }  catch(Exception e){
          request.setAttribute("erreur",e.getMessage());

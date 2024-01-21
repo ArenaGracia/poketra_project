@@ -18,10 +18,6 @@
             <label for="exampleInputUsername1">Spécialité</label>
             <input type="text" class="form-control" id="exampleInputUsername1" name="specialite" placeholder="Specialite">
           </div>
-          <div class="form-group">
-            <label for="exampleInputUsername1">Salaire</label>
-            <input type="text" class="form-control" id="exampleInputUsername1" name="salaire" placeholder="Salaire">
-          </div>
           <%if(message != null){ %>
             <div class="alert alert-success" role="alert">
                 <p><%= message %></p>

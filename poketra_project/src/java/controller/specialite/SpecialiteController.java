@@ -35,10 +35,8 @@ public class SpecialiteController extends HttpServlet {
             throws ServletException, IOException {
         try {
             String nom = request.getParameter("specialite");
-            double salaire=Double.valueOf(request.getParameter("salaire"));
             Specialite specialite =new Specialite();
             specialite.setNom(nom);
-            specialite.setSalaire(salaire);
             specialite.inserer(null);
             request.setAttribute("message", "Insertion réussi");
         } catch (Exception e) {
