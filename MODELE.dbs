@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="poketra" id="PostgreSQL-bff" database="PostgreSQL" >
+	<schema name="poketra" >
+		<table name="detail_modele" >
+			<column name="id_detail_modele" type="varchar" length="7" jt="12" mandatory="y" />
+			<column name="id_modele" type="varchar" length="7" jt="12" mandatory="y" />
+			<column name="id_matiere" type="varchar" length="7" jt="12" mandatory="y" />
+			<column name="qte" type="double precision" jt="3" />
+			<index name="pk_detail_modele" unique="PRIMARY_KEY" >
+				<column name="id_detail_modele" />
+			</index>
+			<fk name="fk_detail_modele_modele" to_schema="poketra" to_table="modele" delete_action="cascade" update_action="cascade" >
+				<fk_column name="id_modele" pk="id_modele" />
+			</fk>
+			<fk name="fk_detail_modele_matiere" to_schema="poketra" to_table="matiere" delete_action="cascade" update_action="cascade" >
+				<fk_column name="id_matiere" pk="id_matiere" />
+			</fk>
+		</table>
+		<table name="employe" >
+			<column name="id_employe" type="varchar" length="7" jt="12" mandatory="y" />
+			<column name="nom" type="varchar[]" jt="2003" />
+			<column name="prenom" type="varchar[]" jt="2003" />
+			<column name="date_naissance" type="date" jt="91" />
+			<column name="id_genre" type="varchar" length="7" jt="12" mandatory="y" />
+			<index name="pk_employe" unique="PRIMARY_KEY" >
+				<column name="id_employe" />
+			</index>
+			<fk name="fk_employe_genre" to_schema="poketra" to_table="genre" delete_action="cascade" update_action="cascade" >
+				<fk_column name="id_genre" pk="id_genre" />
+			</fk>
+		</table>
+		<table name="employe_specialite" >
+			<column name="id_employe_specialite" type="varchar" length="7" jt="12" mandatory="y" />
+			<column name="id_employe" type="varchar" length="7" jt="12" mandatory="y" />
+			<column name="id_specialite" type="varchar" length="7" jt="12" mandatory="y" />
+			<index name="pk_employe_specialite" unique="PRIMARY_KEY" >
+				<column name="id_employe_specialite" />
+			</index>
+			<fk name="fk_employe_specialite_employe" to_schema="poketra" to_table="employe" delete_action="cascade" update_action="cascade" >
+				<fk_column name="id_employe" pk="id_employe" />
+			</fk>
+			<fk name="fk_employe_specialite_specialite" to_schema="poketra" to_table="specialite" delete_action="cascade" update_action="cascade" >
+				<fk_column name="id_specialite" pk="id_specialite" />
+			</fk>
+		</table>
+		<table name="fabrication" >
+			<column name="id_fabrication" type="varchar" length="7" jt="12" mandatory="y" />
+			<column name="id_modele" type="varchar" length="7" jt="12" mandatory="y" />
+			<column name="nb" type="double precision" jt="3" />
+			<column name="date" type="timestamp" jt="93" >
+				<defo><![CDATA[CURRENT_TIMESTAMP]]></defo>
+			</column>
+			<index name="pk_fabrication" unique="PRIMARY_KEY" >
+				<column name="id_fabrication" />
+			</index>
+			<fk name="fk_fabrication_modele" to_schema="poketra" to_table="modele" delete_action="cascade" update_action="cascade" >
+				<fk_column name="id_modele" pk="id_modele" />
+			</fk>
+		</table>
+		<table name="genre" >
+			<column name="id_genre" type="varchar" length="7" jt="12" mandatory="y" />
+			<column name="nom" type="varchar[]" jt="2003" />
+			<index name="pk_genre" unique="PRIMARY_KEY" >
+				<column name="id_genre" />
+			</index>
+		</table>
+		<table name="look" >
+			<column name="id_look" type="varchar" length="7" jt="12" mandatory="y" />
+			<column name="nom" type="varchar[]" jt="2003" />
+			<index name="pk_look" unique="PRIMARY_KEY" >
+				<column name="id_look" />
+			</index>
+		</table>
+		<table name="look_matiere" >
+			<column name="id" type="varchar" length="7" jt="12" mandatory="y" />
+			<column name="id_look" type="varchar" length="7" jt="12" mandatory="y" />
+			<column name="id_matiere" type="varchar" length="7" jt="12" mandatory="y" />
+			<index name="pk_look_matiere" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<fk name="fk_look_matiere_look" to_schema="poketra" to_table="look" delete_action="cascade" update_action="cascade" >
+				<fk_column name="id_look" pk="id_look" />
+			</fk>
+			<fk name="fk_look_matiere_matiere" to_schema="poketra" to_table="matiere" delete_action="cascade" update_action="cascade" >
+				<fk_column name="id_matiere" pk="id_matiere" />
+			</fk>
+		</table>
+		<table name="matiere" >
+			<column name="id_matiere" type="varchar" length="7" jt="12" mandatory="y" />
+			<column name="nom" type="varchar[]" jt="2003" />
+			<index name="pk_matiere" unique="PRIMARY_KEY" >
+				<column name="id_matiere" />
+			</index>
+		</table>
+		<table name="matiere_prix" >
+			<column name="id_matiere_prix" type="varchar" length="7" jt="12" mandatory="y" />
+			<column name="id_matiere" type="varchar" length="7" jt="12" mandatory="y" />
+			<column name="prix" type="double precision" jt="3" />
+			<index name="pk_matier_prix" unique="PRIMARY_KEY" >
+				<column name="id_matiere_prix" />
+			</index>
+			<fk name="fk_matiere_prix_matiere" to_schema="poketra" to_table="matiere" delete_action="cascade" update_action="cascade" >
+				<fk_column name="id_matiere" pk="id_matiere" />
+			</fk>
+		</table>
+		<table name="matiere_unite" >
+			<column name="id" prior="id_matiere_unite" type="varchar[]" jt="2003" mandatory="y" />
+			<column name="id_unite" type="varchar" length="7" jt="12" mandatory="y" />
+			<column name="id_matiere" type="varchar" length="7" jt="12" mandatory="y" />
+			<index name="pk_matiere_unite" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<fk name="fk_matiere_unite_unite" to_schema="poketra" to_table="unite" delete_action="cascade" >
+				<fk_column name="id_unite" pk="id_unite" />
+			</fk>
+			<fk name="fk_matiere_unite_matiere" to_schema="poketra" to_table="matiere" delete_action="cascade" update_action="cascade" options="" >
+				<fk_column name="id_matiere" pk="id_matiere" />
+			</fk>
+		</table>
+		<table name="modele" >
+			<column name="id_modele" type="varchar" length="7" jt="12" mandatory="y" />
+			<column name="id_look" type="varchar" length="7" jt="12" mandatory="y" />
+			<column name="id_type" type="varchar" length="7" jt="12" mandatory="y" />
+			<column name="id_taille" type="varchar" length="7" jt="12" mandatory="y" />
+			<index name="pk_modele" unique="PRIMARY_KEY" >
+				<column name="id_modele" />
+			</index>
+			<fk name="fk_modele_look" to_schema="poketra" to_table="look" delete_action="cascade" update_action="cascade" >
+				<fk_column name="id_look" pk="id_look" />
+			</fk>
+			<fk name="fk_modele_type" to_schema="poketra" to_table="type" delete_action="cascade" update_action="cascade" >
+				<fk_column name="id_type" pk="id_type" />
+			</fk>
+			<fk name="fk_modele_taille" to_schema="poketra" to_table="taille" delete_action="cascade" update_action="cascade" >
+				<fk_column name="id_taille" pk="id_taille" />
+			</fk>
+		</table>
+		<table name="modele_prix_vente" >
+			<column name="id_modele_prix_vente" type="varchar" length="7" jt="12" mandatory="y" />
+			<column name="id_modele" type="varchar" length="7" jt="12" mandatory="y" />
+			<column name="prix_vente" type="double precision" jt="3" />
+			<column name="date" type="timestamp" jt="93" >
+				<defo><![CDATA[CURRENT_TIMESTAMP]]></defo>
+			</column>
+			<index name="pk_modele_prix_vente" unique="PRIMARY_KEY" >
+				<column name="id_modele_prix_vente" />
+			</index>
+			<fk name="fk_modele_prix_vente_modele" to_schema="poketra" to_table="modele" delete_action="cascade" update_action="cascade" >
+				<fk_column name="id_modele" pk="id_modele" />
+			</fk>
+		</table>
+		<table name="modele_specialite" >
+			<column name="id_modele_specialite" type="varchar" length="7" jt="12" mandatory="y" />
+			<column name="id_modele" type="varchar" length="7" jt="12" mandatory="y" />
+			<column name="id_specialite" type="varchar" length="7" jt="12" mandatory="y" />
+			<column name="nombre" type="integer" jt="4" />
+			<column name="duree_mn" prior="duree" type="double precision" jt="3" />
+			<column name="date" type="timestamp" jt="93" >
+				<defo><![CDATA[CURRENT_TIMESTAMP]]></defo>
+			</column>
+			<index name="pk_modele_specialite" unique="PRIMARY_KEY" >
+				<column name="id_modele_specialite" />
+			</index>
+			<fk name="fk_modele_specialite_modele" to_schema="poketra" to_table="modele" delete_action="cascade" update_action="cascade" >
+				<fk_column name="id_modele" pk="id_modele" />
+			</fk>
+			<fk name="fk_modele_specialite_specialite" to_schema="poketra" to_table="specialite" delete_action="cascade" update_action="cascade" >
+				<fk_column name="id_specialite" pk="id_specialite" />
+			</fk>
+		</table>
+		<table name="specialite" >
+			<column name="id_specialite" type="varchar" length="7" jt="12" mandatory="y" />
+			<column name="nom" type="varchar[]" jt="2003" />
+			<index name="pk_specialite" unique="PRIMARY_KEY" >
+				<column name="id_specialite" />
+			</index>
+		</table>
+		<table name="specialite_salaire" >
+			<column name="id_specialite_salaire" type="varchar" length="7" jt="12" mandatory="y" />
+			<column name="id_specialite" type="varchar" length="7" jt="12" mandatory="y" />
+			<column name="salaire_heure" type="double precision" jt="3" />
+			<column name="date" type="timestamp" jt="93" >
+				<defo><![CDATA[CURRENT_TIMESTAMP]]></defo>
+			</column>
+			<index name="pk_specialite_salaire" unique="PRIMARY_KEY" >
+				<column name="id_specialite_salaire" />
+			</index>
+			<fk name="fk_specialite_salaire_specialite" to_schema="poketra" to_table="specialite" delete_action="cascade" update_action="cascade" >
+				<fk_column name="id_specialite" pk="id_specialite" />
+			</fk>
+		</table>
+		<table name="stock" >
+			<column name="id_stock" type="varchar" length="7" jt="12" mandatory="y" />
+			<column name="id_matiere" type="varchar" length="7" jt="12" mandatory="y" />
+			<column name="entrer" type="double precision" jt="3" />
+			<column name="sortie" type="double precision" jt="3" />
+			<column name="date" type="timestamp" jt="93" >
+				<defo><![CDATA[CURRENT_TIMESTAMP]]></defo>
+			</column>
+			<index name="pk_stock" unique="PRIMARY_KEY" >
+				<column name="id_stock" />
+			</index>
+			<fk name="fk_stock_matiere" to_schema="poketra" to_table="matiere" delete_action="cascade" update_action="cascade" >
+				<fk_column name="id_matiere" pk="id_matiere" />
+			</fk>
+		</table>
+		<table name="taille" >
+			<column name="id_taille" type="varchar" length="7" jt="12" mandatory="y" />
+			<column name="nom" type="varchar[]" jt="2003" />
+			<index name="pk_taille" unique="PRIMARY_KEY" >
+				<column name="id_taille" />
+			</index>
+		</table>
+		<table name="type" >
+			<column name="id_type" type="varchar" length="7" jt="12" mandatory="y" />
+			<column name="nom" type="varchar[]" jt="2003" />
+			<index name="pk_tbl" unique="PRIMARY_KEY" >
+				<column name="id_type" />
+			</index>
+		</table>
+		<table name="unite" >
+			<column name="id_unite" type="varchar" length="7" jt="12" mandatory="y" />
+			<column name="nom" type="varchar[]" jt="2003" />
+			<index name="pk_unite" unique="PRIMARY_KEY" >
+				<column name="id_unite" />
+			</index>
+		</table>
+	</schema>
+	<layout name="elements" id="Layout-2622" show_relation="columns" >
+		<entity schema="poketra" name="detail_modele" color="C1D8EE" x="464" y="384" />
+		<entity schema="poketra" name="look" color="C1D8EE" x="512" y="48" />
+		<entity schema="poketra" name="look_matiere" color="C1D8EE" x="416" y="160" />
+		<entity schema="poketra" name="matiere" color="C1D8EE" x="256" y="48" />
+		<entity schema="poketra" name="matiere_unite" color="C1D8EE" x="176" y="176" />
+		<entity schema="poketra" name="modele" color="C1D8EE" x="784" y="240" />
+		<entity schema="poketra" name="taille" color="C1D8EE" x="704" y="48" />
+		<entity schema="poketra" name="type" color="C1D8EE" x="944" y="48" />
+		<entity schema="poketra" name="unite" color="C1D8EE" x="48" y="48" />
+	</layout>
+	<layout name="prix" id="Layout-868" show_relation="columns" >
+		<entity schema="poketra" name="fabrication" color="C1D8EE" x="48" y="240" />
+		<entity schema="poketra" name="matiere" color="3986C1" x="768" y="48" />
+		<entity schema="poketra" name="matiere_prix" color="C1D8EE" x="928" y="192" />
+		<entity schema="poketra" name="modele" color="3986C1" x="176" y="64" />
+		<entity schema="poketra" name="modele_prix_vente" color="C1D8EE" x="320" y="240" />
+		<entity schema="poketra" name="stock" color="C1D8EE" x="608" y="224" />
+	</layout>
+	<layout name="rh" id="Layout-2218" show_relation="columns" >
+		<entity schema="poketra" name="employe" color="C1D8EE" x="768" y="208" />
+		<entity schema="poketra" name="employe_specialite" color="C1D8EE" x="512" y="48" />
+		<entity schema="poketra" name="genre" color="C1D8EE" x="928" y="64" />
+		<entity schema="poketra" name="modele" color="3986C1" x="48" y="48" />
+		<entity schema="poketra" name="modele_specialite" color="C1D8EE" x="96" y="224" />
+		<entity schema="poketra" name="specialite" color="C1D8EE" x="288" y="64" />
+		<entity schema="poketra" name="specialite_salaire" color="C1D8EE" x="368" y="256" />
+	</layout>
+</project>
