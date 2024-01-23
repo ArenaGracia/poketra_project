@@ -54,6 +54,7 @@ public class ModeleController extends HttpServlet {
                     Matiere matiere=new Matiere();
                     matiere.setId(listeM[i]);
                     matiere=matiere.getMatiere(null);
+                    System.out.println("controller.modele.ModeleController.doPost()"+matiere.getId());
                     detail.setMatiere(matiere);
                    
                     detail.setQuantite(Integer.valueOf(liste[i])); prix += matiere.getPrix()*detail.getQuantite();

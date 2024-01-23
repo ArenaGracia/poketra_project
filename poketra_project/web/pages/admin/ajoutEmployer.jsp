@@ -10,7 +10,7 @@
   String message=(String) request.getAttribute("message");
    String erreur=(String) request.getAttribute("erreur");
    ArrayList<Genre> genres=(ArrayList<Genre>) request.getAttribute("genres");
-   ArrayList<Specialite> specs=(ArrayList<Specialite>) request.getAttribute("specs");
+   ArrayList<Specialite> specs=(ArrayList<Specialite>) request.getAttribute("specialites");
  %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <jsp:include page="headerAdmin.jsp" />
@@ -18,7 +18,7 @@
     <div class="card">
       <div class="card-body">
         <h4 class="card-title">Ajout Employé</h4>
-        <form class="forms-sample" action="<%= request.getContextPath() %>/add_genre" method="post">
+        <form class="forms-sample" action="<%= request.getContextPath() %>/add_employe" method="post">
           <div class="form-group">
             <label for="exampleInputUsername1">Nom</label>
             <input type="text" class="form-control" id="exampleInputUsername1" name="nom" placeholder="Nom">
@@ -36,7 +36,7 @@
           <div class="form-group">
               <label for="exampleInputUsername1">Genre</label>
               <div class="input-group mb-2 mr-sm-2">
-                <select class="form-control" name="modele">
+                <select class="form-control" name="genre">
                 <% if(genres!=null) { %>
                     <% for(int i=0;i<genres.size();i++) { %>
                         <option value="<%= genres.get(i).getId()%>"><%= genres.get(i).getNom() %></option>
@@ -51,7 +51,7 @@
             <div class="input-group mb-2 mr-sm-2">
               <% if(specs!=null) { %>
                   <% for(int i=0;i<specs.size();i++) { %>
-                  <p><input type="checkbox" value="<%= specs.get(i).getId()%>" name="specialite" /><%= genres.get(i).getNom() %> <p/>
+                  <p><input type="checkbox" value="<%= specs.get(i).getId()%>" name="specialite" /><%= specs.get(i).getNom() %></p>
                   <% } %>
               <% } %>
             </div>

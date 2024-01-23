@@ -32,7 +32,8 @@ public class Specialite {
         return nom;
     }
 
-    public void setNom(String nom) {
+    public void setNom(String nom) throws Exception {
+        if(nom.equalsIgnoreCase("") || nom.trim().length()==0 || nom==null) throw new Exception("Nom du specialite null");
         this.nom = nom;
     }
 
@@ -40,7 +41,8 @@ public class Specialite {
         return salaire;
     }
 
-    public void setSalaire(double salaire) {
+    public void setSalaire(double salaire) throws Exception {
+        if(salaire<0) throw new Exception("Salaire invalide");
         this.salaire = salaire;
     }  
     
@@ -62,7 +64,6 @@ public class Specialite {
                 Specialite s=new Specialite();
                 s.setId(res.getString("id_specialite"));
                 s.setNom(res.getString("nom"));
-                s.setSalaire(res.getDouble("salaire"));
                 lg.add(s);
             }
         }
@@ -103,7 +104,8 @@ public class Specialite {
                 con=Dbconnect.dbConnect();
                 estValid=true;
             }
-            String sql="INSERT INTO Specialite_salaire VALUES(DEFAULT,'"+this.getNom()+"',"+this.getSalaire()+",DEFAULT)";
+            String sql="INSERT INTO Specialite_salaire VALUES(DEFAULT,'"+this.getId()+"',"+this.getSalaire()+",DEFAULT)";
+            System.out.println("modele.Specialite.insererSalaire() "+sql);
             stmt=con.createStatement();
             stmt.executeUpdate(sql);
         }catch(Exception e){

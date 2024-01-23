@@ -31,7 +31,6 @@ public class EmployeController extends HttpServlet {
             Specialite specialite=new Specialite();
             ArrayList<Genre> liste=genre.getAll(null);
             ArrayList<Specialite> specs=specialite.getAll(null);
-            System.out.println("controller.employe.EmployeController.processRequest()"+specs.size());
             request.setAttribute("genres", liste);
             request.setAttribute("specialites", specs);
         }catch(Exception e){
@@ -60,7 +59,8 @@ public class EmployeController extends HttpServlet {
             }
             String nom=request.getParameter("nom");
             String prenom=request.getParameter("prenom");
-            Date dateNaissance=Date.valueOf(request.getParameter("dtn"));
+            String dateNaissance=request.getParameter("dtn");
+            System.out.println("controller.employe.EmployeController.doPost() "+ dateNaissance);
             String genre=request.getParameter("genre");
             Genre g=new Genre();
             g.setId(genre);

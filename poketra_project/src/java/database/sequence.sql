@@ -140,3 +140,11 @@ CREATE SEQUENCE modele_prix_vente_sequence
     MINVALUE 1
     MAXVALUE 999999
     CACHE 1;
+
+
+CREATE SEQUENCE specialite_salaire_sequence
+    START 1
+    INCREMENT 1
+    MINVALUE 1
+    MAXVALUE 999999
+    CACHE 1;

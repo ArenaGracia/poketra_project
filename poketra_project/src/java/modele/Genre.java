@@ -31,7 +31,8 @@ public class Genre {
         return nom;
     }
 
-    public void setNom(String nom) {
+    public void setNom(String nom) throws Exception {
+        if(nom.equalsIgnoreCase("") || nom.trim().length()==0 || nom==null) throw new Exception("Nom du genre null");
         this.nom = nom;
     }
     

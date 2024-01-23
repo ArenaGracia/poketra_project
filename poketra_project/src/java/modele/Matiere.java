@@ -92,13 +92,12 @@ public class Matiere {
                 c= Dbconnect.dbConnect();
                 isValid=true;
              }
-             String sql="SELECT * FROM v_Matiere_prix WHERE id_matiere='"+this.getId()+"'";
+             String sql="SELECT * FROM v_Matiere_unite WHERE id_matiere='"+this.getId()+"'";
              s=c.createStatement();
              res=s.executeQuery(sql);
              while(res.next()){
                  Unite unite=new Unite(res.getString("id_unite"),res.getString("nom_unite"));
                  matiere=new Matiere(res.getString("id_matiere"),res.getString("nom_matiere"),unite);
-                 matiere.setPrix(res.getDouble("prix"));
              }
              
          } catch (Exception e) {

@@ -91,7 +91,8 @@
             <div class="collapse" id="form-elements">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"><a class="nav-link" href="<%= request.getContextPath() %>/add_genre">Ajout Genre</a></li>
-                <li class="nav-item"><a class="nav-link" href="<%= request.getContextPath() %>/add_specialite">Ajout Specialité avec salaire</a></li>
+                <li class="nav-item"><a class="nav-link" href="<%= request.getContextPath() %>/add_specialite">Ajout Specialité</a></li>
+                <li class="nav-item"><a class="nav-link" href="<%= request.getContextPath() %>/add_specialite_prix">Salaire par Specialité</a></li>
                 <li class="nav-item"><a class="nav-link" href="<%= request.getContextPath() %>/add_employe">Ajout Employé</a></li>
                 <li class="nav-item"><a class="nav-link" href="<%= request.getContextPath() %>/add_prix_vente">Ajouter un prix</a></li>
               </ul>

@@ -55,6 +55,7 @@ CREATE TABLE Matiere_prix (
     id_matiere_prix VARCHAR(10) DEFAULT ('MTP') || LPAD(nextval('matiere_prix_sequence')::TEXT,4,'0') PRIMARY KEY,
     id_matiere VARCHAR(10),
     prix DOUBLE PRECISION,
+    date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (id_matiere) REFERENCES Matiere(id_matiere)
 );
 
@@ -91,7 +92,7 @@ CREATE TABLE Employe(
 
 CREATE TABLE Specialite(
     id_specialite VARCHAR(10) DEFAULT ('SPC') || LPAD(nextval('specialite_sequence')::TEXT,4,'0') PRIMARY KEY,
-    nom VARCHAR(20),
+    nom VARCHAR(20)
 );
 
 CREATE TABLE Specialite_Salaire(
