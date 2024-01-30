@@ -14,10 +14,6 @@
 <div class="col-md-12 grid-margin stretch-card">
 <div class="card">
     <div class="card-body">
-<<<<<<< Updated upstream
-=======
-        <h4 class='card-title'>Liste des sacs selon le prix de confection</h4>
->>>>>>> Stashed changes
     <% if(liste!=null) { %>
             <div class="table-responsive">
               <table class="table">

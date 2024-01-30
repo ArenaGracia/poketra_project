@@ -18,10 +18,6 @@ import java.util.ArrayList;
 public class Genre {
     String id;
     String nom;
-<<<<<<< Updated upstream
-=======
-    String couleur;
->>>>>>> Stashed changes
 
     public String getId() {
         return id;
@@ -34,26 +30,7 @@ public class Genre {
     public String getNom() {
         return nom;
     }
-<<<<<<< Updated upstream
 
-=======
-    
-    public String getCouleur(){
-        if(getNom().equals("Femme")) return "rgba(255, 99, 132, 0.5)";
-        if(getNom().equals("Homme")) return "rgba(54, 162, 235, 0.5)";
-        return null;
-    }
-
-    public Genre(String id, String nom) {
-        this.id = id;
-        this.nom = nom;
-    }
-
-    public Genre() {
-    }
-
-    
->>>>>>> Stashed changes
     public void setNom(String nom) throws Exception {
         if(nom.equalsIgnoreCase("") || nom.trim().length()==0 || nom==null) throw new Exception("Nom du genre null");
         this.nom = nom;

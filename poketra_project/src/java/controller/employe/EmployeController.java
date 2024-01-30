@@ -50,7 +50,6 @@ public class EmployeController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try{
-<<<<<<< Updated upstream
             String[] specialite=request.getParameterValues("specialite");
             ArrayList<Specialite> liste=new ArrayList<Specialite>();
             for (String s :specialite) {
@@ -58,9 +57,6 @@ public class EmployeController extends HttpServlet {
                 spec.setId(s);
                 liste.add(spec);
             }
-=======
-            String specialite=request.getParameter("specialite");
->>>>>>> Stashed changes
             String nom=request.getParameter("nom");
             String prenom=request.getParameter("prenom");
             String dateNaissance=request.getParameter("dtn");
@@ -69,17 +65,9 @@ public class EmployeController extends HttpServlet {
             Genre g=new Genre();
             g.setId(genre);
             Employe emp=new Employe();
-<<<<<<< Updated upstream
             emp.setDateNaissance(dateNaissance);
             emp.setGenre(g);
             emp.setSpecialites(liste);
-=======
-            Specialite spec=new Specialite();
-            spec.setId(specialite);
-            emp.setDateNaissance(dateNaissance);
-            emp.setGenre(g);
-            emp.setSpecialite(spec);
->>>>>>> Stashed changes
             emp.setNom(nom);
             emp.setPrenom(prenom);
             emp.insererEmployer(null);

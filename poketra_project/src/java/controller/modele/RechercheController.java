@@ -36,10 +36,6 @@ public class RechercheController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-<<<<<<< Updated upstream
-=======
-        boolean forwarded=false;
->>>>>>> Stashed changes
         try{
                 double min=Double.valueOf(request.getParameter("min"));
                 double max=Double.valueOf(request.getParameter("max"));
@@ -51,7 +47,6 @@ public class RechercheController extends HttpServlet {
         catch(Exception e){
             request.setAttribute("erreur",e.getMessage());
             processRequest(request, response);
-<<<<<<< Updated upstream
         }
         finally{
             request.getRequestDispatcher("./pages/admin/listSac.jsp").forward(request, response);                  
@@ -68,12 +63,4 @@ public class RechercheController extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-=======
-            forwarded=true;
-        }
-        finally{
-            if(!forwarded) request.getRequestDispatcher("./pages/admin/listSac.jsp").forward(request, response);                  
-        }
-    }
->>>>>>> Stashed changes
 }

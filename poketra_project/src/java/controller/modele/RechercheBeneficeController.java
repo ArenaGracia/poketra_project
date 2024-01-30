@@ -36,10 +36,6 @@ public class RechercheBeneficeController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-<<<<<<< Updated upstream
-=======
-        boolean forwarded = false;
->>>>>>> Stashed changes
         try{
                 double min=Double.valueOf(request.getParameter("min"));
                 double max=Double.valueOf(request.getParameter("max"));
@@ -50,18 +46,10 @@ public class RechercheBeneficeController extends HttpServlet {
         }
         catch(Exception e){
             request.setAttribute("erreur",e.getMessage());
-<<<<<<< Updated upstream
             processRequest(request, response);
         }
         finally{
             request.getRequestDispatcher("./pages/admin/listSacByBenefice.jsp").forward(request, response);                  
-=======
-            request.getRequestDispatcher("./pages/admin/rechercheBenefice.jsp").forward(request, response);
-            forwarded=true;
-        }
-        finally{
-            if(!forwarded) request.getRequestDispatcher("./pages/admin/listSacByBenefice.jsp").forward(request, response);                  
->>>>>>> Stashed changes
         }
     }
 }

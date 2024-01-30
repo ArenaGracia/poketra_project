@@ -27,17 +27,10 @@ public class Fabrication {
             if(stock.getReste()<nbr) throw new Exception("Il manque "+n+" "+detail.getMatiere().getNom());
             Stock sortie=new Stock();
             sortie.setSortie(nbr);
-<<<<<<< Updated upstream
             sortie.setEntrer(0);
             liste.add(stock);
         }
         
-=======
-            sortie.setMatiere(detail.getMatiere());
-            sortie.setEntrer(0);
-            liste.add(sortie);
-        }
->>>>>>> Stashed changes
         return liste;
     }
     
@@ -53,17 +46,7 @@ public class Fabrication {
             c.setAutoCommit(false);
             for(Stock stock : stocks ){
                 stock.setDate(this.getDate());
-<<<<<<< Updated upstream
                 stock.insertStock(c);
-=======
-                String sql= "INSERT INTO Stock (id_matiere, entrer, sortie , date) VALUES ( " + 
-                        "  \'" + stock.getMatiere().getId()+ "\', " +                       
-                        "  " + stock.getEntrer() + ", " +stock.getSortie()+", "+ 
-                        "  \'" + stock.getDate() + "\') " ;
-                System.out.println(sql);
-                s=c.createStatement();
-                s.executeUpdate(sql);
->>>>>>> Stashed changes
             }
             String sql= "INSERT INTO Fabrication (id_modele, nb, date) VALUES ( " + 
                        "  \'" + this.getModele().getId()+ "\', " +                       

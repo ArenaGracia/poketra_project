@@ -113,11 +113,7 @@ CREATE SEQUENCE specialite_sequence
     MAXVALUE 999999
     CACHE 1;
 
-<<<<<<< Updated upstream
 CREATE SEQUENCE employe_specialite_sequence
-=======
-CREATE SEQUENCE specialite_salaire_sequence
->>>>>>> Stashed changes
     START 1
     INCREMENT 1
     MINVALUE 1
@@ -131,16 +127,6 @@ CREATE SEQUENCE employe_sequence
     MAXVALUE 999999
     CACHE 1;
 
-<<<<<<< Updated upstream
-=======
-CREATE SEQUENCE embauche_employe_sequence
-    START 1
-    INCREMENT 1
-    MINVALUE 1
-    MAXVALUE 999999
-    CACHE 1;
-
->>>>>>> Stashed changes
 CREATE SEQUENCE modele_specialite_sequence
     START 1
     INCREMENT 1
@@ -156,25 +142,7 @@ CREATE SEQUENCE modele_prix_vente_sequence
     CACHE 1;
 
 
-<<<<<<< Updated upstream
 CREATE SEQUENCE specialite_salaire_sequence
-=======
-CREATE SEQUENCE status_sequence
-    START 1
-    INCREMENT 1
-    MINVALUE 1
-    MAXVALUE 999999
-    CACHE 1;
-
-CREATE SEQUENCE vente_sequence
-    START 1
-    INCREMENT 1
-    MINVALUE 1
-    MAXVALUE 999999
-    CACHE 1;
-
-CREATE SEQUENCE client_sequence
->>>>>>> Stashed changes
     START 1
     INCREMENT 1
     MINVALUE 1

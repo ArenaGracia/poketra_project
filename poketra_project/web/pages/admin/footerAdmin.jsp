@@ -30,4 +30,5 @@
   <script src="<%= request.getContextPath() %>/assets/js/todolist.js"></script>
 <!-- End custom js for this page-->
 </body>
+
 </html>
