@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller.modele;
+package controller.vente;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,14 +16,22 @@ import modele.Modele;
 
 /**
  *
- * @author ASUS
+ * @author ITU
  */
-public class RechercheController extends HttpServlet {
-    
+public class StatistiqueVenteController extends HttpServlet {
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-            request.getRequestDispatcher("./pages/admin/recherchePrix.jsp").forward(request, response);
+        try{
+            Modele modele=new Modele();
+            ArrayList<Modele> liste=modele.getModeles(null);
+            request.setAttribute("modeles", liste);
+        }catch(Exception e){
+            System.out.println("controller.vente.StatistiqueVenteController.processRequest()"+e.getMessage());
+        }finally{
+            request.getRequestDispatcher("./pages/admin/statistique.jsp").forward(request, response);
+        }
     }
 
     @Override
@@ -35,23 +43,16 @@ public class RechercheController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        boolean forwarded=false;
         try{
-                double min=Double.valueOf(request.getParameter("min"));
-                double max=Double.valueOf(request.getParameter("max"));
-                Modele mod=new Modele();
-                ArrayList<Modele> listMod= mod.getModelePrix(null,min,max);
-                System.out.println(listMod.size());
-                request.setAttribute("modeles",listMod);
-        }
-        catch(Exception e){
-            request.setAttribute("erreur",e.getMessage());
-            processRequest(request, response);
-            forwarded=true;
-        }
-        finally{
-            if(!forwarded) request.getRequestDispatcher("./pages/admin/listSac.jsp").forward(request, response);                  
+            String idModele=request.getParameter("modele");
+            Modele m=new Modele();
+            m.setId(idModele);
+            m=m.getModeleParChoix(null);
+            request.setAttribute("modele", m);
+        }catch(Exception e){
+            System.out.println("controller.vente.StatistiqueVenteController.doPost()"+e.getMessage());
+        }finally{
+            request.getRequestDispatcher("./pages/admin/statVente.jsp").forward(request, response);
         }
     }
 }

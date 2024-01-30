@@ -3,27 +3,28 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller.modele;
+package controller.status;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import modele.Modele;
+import modele.Status;
 
 /**
  *
  * @author ASUS
  */
-public class RechercheController extends HttpServlet {
-    
+public class StatusController extends HttpServlet {
+
+   
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-            request.getRequestDispatcher("./pages/admin/recherchePrix.jsp").forward(request, response);
+         request.getRequestDispatcher("./pages/admin/ajoutStatus.jsp").forward(request, response);
+       
     }
 
     @Override
@@ -31,27 +32,31 @@ public class RechercheController extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
     }
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        boolean forwarded=false;
+        processRequest(request, response);
         try{
-                double min=Double.valueOf(request.getParameter("min"));
-                double max=Double.valueOf(request.getParameter("max"));
-                Modele mod=new Modele();
-                ArrayList<Modele> listMod= mod.getModelePrix(null,min,max);
-                System.out.println(listMod.size());
-                request.setAttribute("modeles",listMod);
-        }
-        catch(Exception e){
-            request.setAttribute("erreur",e.getMessage());
-            processRequest(request, response);
-            forwarded=true;
+            String status=request.getParameter("status");
+            int anc=Integer.valueOf(request.getParameter("anc"));
+            double taux=Double.valueOf(request.getParameter("horaire"));
+            Status stat=new Status();
+            stat.setNom(status);
+            stat.setNb_annee(anc);
+            stat.setTaux(taux);
+            stat.insererStatus(null);
+            request.setAttribute("message", "Insertion réussie");
+        }catch(Exception ex){
+            request.setAttribute("erreur", ex.getMessage());
         }
         finally{
-            if(!forwarded) request.getRequestDispatcher("./pages/admin/listSac.jsp").forward(request, response);                  
+             processRequest(request, response);
         }
     }
+    
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }// </editor-fold>
+
 }

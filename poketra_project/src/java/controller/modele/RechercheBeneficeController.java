@@ -36,6 +36,7 @@ public class RechercheBeneficeController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        boolean forwarded = false;
         try{
                 double min=Double.valueOf(request.getParameter("min"));
                 double max=Double.valueOf(request.getParameter("max"));
@@ -46,10 +47,11 @@ public class RechercheBeneficeController extends HttpServlet {
         }
         catch(Exception e){
             request.setAttribute("erreur",e.getMessage());
-            processRequest(request, response);
+            request.getRequestDispatcher("./pages/admin/rechercheBenefice.jsp").forward(request, response);
+            forwarded=true;
         }
         finally{
-            request.getRequestDispatcher("./pages/admin/listSacByBenefice.jsp").forward(request, response);                  
+            if(!forwarded) request.getRequestDispatcher("./pages/admin/listSacByBenefice.jsp").forward(request, response);                  
         }
     }
 }

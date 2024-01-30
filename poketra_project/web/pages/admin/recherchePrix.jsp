@@ -14,11 +14,11 @@
         <h4 class="card-title">Inserer deux prix</h4>
         <form class="forms-sample" action="<%= request.getContextPath() %>/recherche_modele" method="post">
            <div class="form-group">
-            <label for="exampleInputPassword1">Prix 1</label>
+            <label for="exampleInputPassword1">Prix minimum</label>
             <input type="text" class="form-control" name="min">
           </div>  
           <div class="form-group">
-            <label for="exampleInputPassword1">Prix 2</label>
+            <label for="exampleInputPassword1">Prix maximum</label>
             <input type="text" class="form-control" name="max">
           </div>  
           <%if(erreur != null){ %>

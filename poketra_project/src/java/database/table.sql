@@ -81,15 +81,6 @@ CREATE TABLE Genre(
     nom VARCHAR(20)
 );
 
-CREATE TABLE Employe(
-    id VARCHAR(10) DEFAULT ('EMP') || LPAD(nextval('employe_sequence')::TEXT,4,'0') PRIMARY KEY,
-    nom VARCHAR(40),
-    prenom VARCHAR(40),
-    id_genre VARCHAR(10),
-    dtn DATE,
-    FOREIGN KEY (id_genre) REFERENCES Genre(id)
-);
-
 CREATE TABLE Specialite(
     id_specialite VARCHAR(10) DEFAULT ('SPC') || LPAD(nextval('specialite_sequence')::TEXT,4,'0') PRIMARY KEY,
     nom VARCHAR(20)
@@ -103,12 +94,23 @@ CREATE TABLE Specialite_Salaire(
     FOREIGN KEY (id_specialite) REFERENCES Specialite(id_specialite)
 );
 
-CREATE TABLE Employe_specialite(
-    id_employe_specialite VARCHAR(10) DEFAULT ('ESL') || LPAD(nextval('employe_specialite_sequence')::TEXT,4,'0') PRIMARY KEY,
-    id_employe VARCHAR(10),
+CREATE TABLE Employe(
+    id VARCHAR(10) DEFAULT ('EMP') || LPAD(nextval('employe_sequence')::TEXT,4,'0') PRIMARY KEY,
+    nom VARCHAR(40),
+    prenom VARCHAR(40),
+    id_genre VARCHAR(10),
+    dtn DATE,
     id_specialite VARCHAR(10),
-    FOREIGN KEY (id_Employe) REFERENCES Employe(id),
-    FOREIGN KEY (id_Specialite) REFERENCES Specialite(id_specialite)
+    is_embaucher INTEGER DEFAULT 1,
+    FOREIGN KEY (id_Specialite) REFERENCES Specialite(id_specialite),
+    FOREIGN KEY (id_genre) REFERENCES Genre(id)
+);
+
+CREATE TABLE Embauche_employe(
+    id VARCHAR(10) DEFAULT ('EBE') || LPAD(nextval('embauche_employe_sequence')::TEXT,4,'0') PRIMARY KEY,
+    id_employe VARCHAR(10),
+    date_embauche DATE DEFAULT CURRENT_DATE,
+    FOREIGN KEY (id_employe) REFERENCES Employe(id)
 );
 
 CREATE TABLE Modele_specialite (
@@ -128,4 +130,28 @@ CREATE TABLE Modele_prix_vente (
     prix_vente DOUBLE PRECISION,
     date TIMESTAMP  default CURRENT_TIMESTAMP,
     FOREIGN KEY (id_modele) REFERENCES Modele(id)
+);
+
+CREATE TABLE Status(
+    id_status VARCHAR(10) DEFAULT ('STA') || LPAD(nextval('status_sequence')::TEXT,4,'0') PRIMARY KEY,
+    nom VARCHAR(10),
+    nb_annee INTEGER,
+    taux_horaire INTEGER
+);
+
+CREATE TABLE Client(
+    id_client VARCHAR(10) DEFAULT ('CLT') || LPAD(nextval('client_sequence')::TEXT,4,'0') PRIMARY KEY,
+    nom VARCHAR(10),
+    id_genre VARCHAR(10),
+    FOREIGN KEY (id_genre) REFERENCES Genre(id)
+);
+
+CREATE TABLE Vente (
+    id_vente VARCHAR(10) DEFAULT ('VEN') || LPAD (NEXTVAL('vente_sequence')::TEXT, 4, '0') PRIMARY KEY,
+    id_modele VARCHAR(10),
+    id_client VARCHAR(10),
+    nombre DOUBLE PRECISION,
+    date DATE DEFAULT NOW()  ,
+    FOREIGN KEY (id_modele) REFERENCES Modele(id),
+    FOREIGN KEY (id_client) REFERENCES Client(id_client)
 );

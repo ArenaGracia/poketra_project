@@ -14,29 +14,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import modele.Employe;
-import modele.Genre;
-import modele.Specialite;
 
 /**
  *
  * @author ITU
  */
-public class EmployeController extends HttpServlet {
+public class EmbaucheEmployeController extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try{
-            Genre genre=new Genre();
-            Specialite specialite=new Specialite();
-            ArrayList<Genre> liste=genre.getAll(null);
-            ArrayList<Specialite> specs=specialite.getAll(null);
-            request.setAttribute("genres", liste);
-            request.setAttribute("specialites", specs);
+            Employe emp=new Employe();
+            ArrayList<Employe> listes=emp.getAll(null);
+            request.setAttribute("emps", listes);
         }catch(Exception e){
-            e.printStackTrace();
+            
         }finally{
-            request.getRequestDispatcher("./pages/admin/ajoutEmployer.jsp").forward(request, response);
+            request.getRequestDispatcher("./pages/admin/ajoutEmployeEmbauche.jsp").forward(request, response);
         }
     }
 
@@ -49,25 +44,16 @@ public class EmployeController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        processRequest(request, response);
         try{
-            String specialite=request.getParameter("specialite");
-            String nom=request.getParameter("nom");
-            String prenom=request.getParameter("prenom");
-            String dateNaissance=request.getParameter("dtn");
-            System.out.println("controller.employe.EmployeController.doPost() "+ dateNaissance);
-            String genre=request.getParameter("genre");
-            Genre g=new Genre();
-            g.setId(genre);
+            Date embauche=Date.valueOf(request.getParameter("date"));
+            String id=request.getParameter("emp");
+            System.out.println("controller.employe.EmbaucheEmployeController.doPost()"+id);
             Employe emp=new Employe();
-            Specialite spec=new Specialite();
-            spec.setId(specialite);
-            emp.setDateNaissance(dateNaissance);
-            emp.setGenre(g);
-            emp.setSpecialite(spec);
-            emp.setNom(nom);
-            emp.setPrenom(prenom);
-            emp.insererEmployer(null);
-            request.setAttribute("message", "Insertion réussie");
+            emp.setDateEmbauche(embauche);
+            emp.setId(id);
+            emp.insererDateEmbauche(null);
+            request.setAttribute("message","Succes");
         }catch(Exception e){
             request.setAttribute("erreur", e.getMessage());
         }finally{

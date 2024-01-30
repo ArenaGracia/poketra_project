@@ -14,6 +14,7 @@
 <div class="col-md-12 grid-margin stretch-card">
 <div class="card">
     <div class="card-body">
+        <h4>Liste des sacs selon les bénéfices</h4>
     <% if(liste!=null) { %>
             <div class="table-responsive">
               <table class="table">

@@ -11,7 +11,7 @@ import java.sql.SQLException;
 
 public class Dbconnect {
     public static Connection dbConnect() throws SQLException,Exception {
-       Class.forName("org.postgresql.Driver");
+        Class.forName("org.postgresql.Driver");
         return DriverManager.getConnection("jdbc:postgresql://localhost:5433/project_poketra","postgres","adminp15");
     }
 }

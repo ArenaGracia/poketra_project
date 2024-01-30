@@ -49,11 +49,13 @@
           <div class="form-group">
             <label for="exampleInputUsername1">Specialités</label>
             <div class="input-group mb-2 mr-sm-2">
-              <% if(specs!=null) { %>
-                  <% for(int i=0;i<specs.size();i++) { %>
-                  <p><input type="checkbox" value="<%= specs.get(i).getId()%>" name="specialite" /><%= specs.get(i).getNom() %></p>
-                  <% } %>
-              <% } %>
+              <select class="form-control" name="specialite">
+                <% if(specs!=null) { %>
+                    <% for(int i=0;i<specs.size();i++) { %>
+                        <option value="<%= specs.get(i).getId()%>"><%= specs.get(i).getNom() %></option>                        
+                    <% } %>
+                <% } %>
+              </select>
             </div>
           </div>
                 

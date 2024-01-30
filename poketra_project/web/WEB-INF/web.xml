@@ -92,6 +92,30 @@
         <servlet-name>SpecialitePrixController</servlet-name>
         <servlet-class>controller.specialite.SpecialitePrixController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>listEmployeStatusController</servlet-name>
+        <servlet-class>controller.employe.ListEmployeStatusController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>StatusController</servlet-name>
+        <servlet-class>controller.status.StatusController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EmbaucheEmployeController</servlet-name>
+        <servlet-class>controller.employe.EmbaucheEmployeController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>StatistiqueVenteController</servlet-name>
+        <servlet-class>controller.vente.StatistiqueVenteController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>VenteController</servlet-name>
+        <servlet-class>controller.vente.VenteController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ClientController</servlet-name>
+        <servlet-class>controller.client.ClientController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>UniteController</servlet-name>
         <url-pattern>/add_unite</url-pattern>
@@ -183,6 +207,30 @@
     <servlet-mapping>
         <servlet-name>SpecialitePrixController</servlet-name>
         <url-pattern>/add_specialite_prix</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>listEmployeStatusController</servlet-name>
+        <url-pattern>/list_employe_status</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StatusController</servlet-name>
+        <url-pattern>/add_status</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EmbaucheEmployeController</servlet-name>
+        <url-pattern>/add_date_embauche</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StatistiqueVenteController</servlet-name>
+        <url-pattern>/stat_vente</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>VenteController</servlet-name>
+        <url-pattern>/add_vente</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ClientController</servlet-name>
+        <url-pattern>/add_client</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
