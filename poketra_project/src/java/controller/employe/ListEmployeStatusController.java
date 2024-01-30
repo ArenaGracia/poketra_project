@@ -3,59 +3,54 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller.modele;
+package controller.employe;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import modele.Modele;
+import modele.Employe;
 
 /**
  *
  * @author ASUS
  */
-public class RechercheController extends HttpServlet {
-    
+public class ListEmployeStatusController extends HttpServlet {
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-            request.getRequestDispatcher("./pages/admin/recherchePrix.jsp").forward(request, response);
+        request.getRequestDispatcher("./pages/admin/listEmployeStatus.jsp").forward(request, response);
     }
 
+   
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        
     }
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-<<<<<<< Updated upstream
-=======
-        boolean forwarded=false;
->>>>>>> Stashed changes
+//        processRequest(request, response);
         try{
-                double min=Double.valueOf(request.getParameter("min"));
-                double max=Double.valueOf(request.getParameter("max"));
-                Modele mod=new Modele();
-                ArrayList<Modele> listMod= mod.getModelePrix(null,min,max);
-                System.out.println(listMod.size());
-                request.setAttribute("modeles",listMod);
-        }
-        catch(Exception e){
-            request.setAttribute("erreur",e.getMessage());
-            processRequest(request, response);
-<<<<<<< Updated upstream
+            Employe emp=new Employe();
+            Date embauche=Date.valueOf(request.getParameter("embauche"));
+            ArrayList<Employe> list=emp.getEmployeStatus(embauche,null);
+            request.setAttribute("employes",list);
+            
+        }catch(Exception ex){
+             request.setAttribute("erreur", ex.getMessage());
         }
         finally{
-            request.getRequestDispatcher("./pages/admin/listSac.jsp").forward(request, response);                  
+            processRequest(request, response);
         }
+       
     }
 
     /**
@@ -68,12 +63,4 @@ public class RechercheController extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-=======
-            forwarded=true;
-        }
-        finally{
-            if(!forwarded) request.getRequestDispatcher("./pages/admin/listSac.jsp").forward(request, response);                  
-        }
-    }
->>>>>>> Stashed changes
 }

@@ -23,6 +23,7 @@
   <link rel="stylesheet" href="<%= request.getContextPath() %>/assets/css/vertical-layout-light/style.css">
   <!-- endinject -->
   <link rel="shortcut icon" href="<%= request.getContextPath() %>/assets/images/favicon.png" />
+
 </head>
 <body>
   <div class="container-scroller">
@@ -66,28 +67,38 @@
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
+            <a class="nav-link" data-toggle="collapse" href="#tables" aria-expanded="false" aria-controls="tables">
               <i class="icon-columns menu-icon"></i>
               <span class="menu-title">Listes</span>
               <i class="menu-arrow"></i>
             </a>
-            <div class="collapse" id="form-elements">
+            <div class="collapse" id="tables">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"><a class="nav-link" href="<%= request.getContextPath() %>/list_matiere">Matières par look</a></li>
                 <li class="nav-item"><a class="nav-link" href="<%= request.getContextPath() %>/list_matiere_produit">Détails par matière</a></li>
                 <li class="nav-item"><a class="nav-link" href="<%= request.getContextPath() %>/recherche_modele">Rechercher</a></li>
                 <li class="nav-item"><a class="nav-link" href="<%= request.getContextPath() %>/recherche_benefice">Bénéfice</a></li>
                 <li class="nav-item"><a class="nav-link" href="<%= request.getContextPath() %>/stock_matiere">Matières</a></li>
+<<<<<<< Updated upstream
+=======
+                <li class="nav-item"><a class="nav-link" href="<%= request.getContextPath() %>/list_employe_status">Employés</a></li>
+
+>>>>>>> Stashed changes
               </ul>
             </div>
           </li>
           
           <li class="nav-item">
+<<<<<<< Updated upstream
             <a class="nav-link" data-toggle="collapse" href="#ui-basics" aria-expanded="false" aria-controls="form-elements">
+=======
+            <a class="nav-link" data-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">
+>>>>>>> Stashed changes
               <i class="icon-columns menu-icon"></i>
               <span class="menu-title">RH</span>
               <i class="menu-arrow"></i>
             </a>
+<<<<<<< Updated upstream
             <div class="collapse" id="form-elements">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"><a class="nav-link" href="<%= request.getContextPath() %>/add_genre">Ajout Genre</a></li>
@@ -95,6 +106,32 @@
                 <li class="nav-item"><a class="nav-link" href="<%= request.getContextPath() %>/add_specialite_prix">Salaire par Specialité</a></li>
                 <li class="nav-item"><a class="nav-link" href="<%= request.getContextPath() %>/add_employe">Ajout Employé</a></li>
                 <li class="nav-item"><a class="nav-link" href="<%= request.getContextPath() %>/add_prix_vente">Ajouter un prix</a></li>
+=======
+            <div class="collapse" id="icons">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"><a class="nav-link" href="<%= request.getContextPath() %>/add_genre">Ajout Genre</a></li>
+                <li class="nav-item"><a class="nav-link" href="<%= request.getContextPath() %>/add_client">Ajout Client</a></li>
+                <li class="nav-item"><a class="nav-link" href="<%= request.getContextPath() %>/add_specialite">Ajout Specialité</a></li>
+                <li class="nav-item"><a class="nav-link" href="<%= request.getContextPath() %>/add_specialite_prix">Salaire par Specialité</a></li>
+                <li class="nav-item"><a class="nav-link" href="<%= request.getContextPath() %>/add_employe">Ajout Personne</a></li>
+                <li class="nav-item"><a class="nav-link" href="<%= request.getContextPath() %>/add_date_embauche">Embaucher</a></li>
+                <li class="nav-item"><a class="nav-link" href="<%= request.getContextPath() %>/add_prix_vente">Ajouter un prix</a></li>
+                <li class="nav-item"><a class="nav-link" href="<%= request.getContextPath() %>/add_status">Ajouter un status</a></li>
+                <li class="nav-item"><a class="nav-link" href="<%= request.getContextPath() %>/add_vente">Ajouter un vente</a></li>
+              </ul>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
+              <i class="icon-columns menu-icon"></i>
+              <span class="menu-title">Statistiques</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="charts">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"><a class="nav-link" href="<%= request.getContextPath() %>/stat_vente">Statistique de vente</a></li>
+>>>>>>> Stashed changes
               </ul>
             </div>
           </li>

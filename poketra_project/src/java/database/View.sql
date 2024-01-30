@@ -134,4 +134,118 @@ CREATE OR REPLACE VIEW v_modele_benefice AS(
     SELECT id,id_type,nom_type,id_look,nom_look,id_taille,nom_taille,(prix_vente - prix_revient) benefice
         FROM v_vente m
         JOIN v_prix_revient vpr ON vpr.id=m.id_modele 
+<<<<<<< Updated upstream
 );
+=======
+);
+
+CREATE OR REPLACE VIEW v_employe AS (
+    SELECT 
+    e.id,
+    e.nom Nom,
+    e.prenom, 
+    e.id_specialite,
+    s.nom Specialite,
+    e.id_genre,
+    g.nom nom_genre,
+    ss.salaire_heure Salaire_Heure,
+    e.is_embaucher,
+    ee.date_embauche
+    FROM Employe e
+    LEFT JOIN Embauche_employe ee ON e.id=ee.id_employe
+    JOIN Specialite s ON e.id_specialite = s.id_specialite
+    JOIN Genre g ON g.id=e.id_genre
+    JOIN Specialite_Salaire ss ON s.id_specialite = ss.id_specialite
+);
+
+CREATE OR REPLACE VIEW v_client AS (
+    SELECT
+    c.id_client,
+    c.nom AS Nom_client,
+    c.id_genre,
+    g.id,
+    g.nom
+    FROM Client c
+    JOIN Genre g ON c.id_genre=g.id
+);
+
+CREATE OR REPLACE VIEW v_genre AS(
+    SELECT 
+        id,nom,0 nombre
+        FROM genre
+);
+
+CREATE OR REPLACE VIEW v_stat1 AS(
+    SELECT m.id,v.id id_genre,v.nombre
+        FROM v_genre v,modele m
+    UNION
+    SELECT 
+        m.id,
+        c.id_genre,
+        SUM(v.nombre) AS valeur
+    FROM Vente v
+    JOIN Modele m ON v.id_modele=m.id
+    JOIN v_Client c ON v.id_client=c.id_client
+    GROUP BY m.id,c.id_genre
+);
+
+CREATE OR REPLACE VIEW v_statistique_modele1 AS(
+    SELECT v.id_genre,v.id id_modele,max(nombre) valeur,nom
+        FROM v_Stat1 v
+        JOIN genre g on g.id=v.id_genre
+    GROUP BY v.id_genre,v.id,nom
+);
+
+
+
+CREATE OR REPLACE VIEW v_somme_vente_modele1 AS(
+    SELECT m.id,0 total
+        FROM modele m
+    UNION ALL
+    SELECT 
+    v.id_modele,
+    SUM(v.nombre) AS total
+    FROM Vente v
+    JOIN Client c on v.id_client=c.id_client
+    GROUP BY v.id_modele
+);
+
+CREATE OR REPLACE VIEW v_somme_vente_modele AS(
+    SELECT v.id id_modele,max(total) total
+        FROM v_somme_vente_modele1 v
+    GROUP BY v.id
+);
+
+
+CREATE OR REPLACE VIEW v_statistique_modele AS(
+    SELECT 
+        v.id_modele,
+        vs.id_genre,
+        vs.valeur,
+        (case when v.total=0 then 0 else (vs.valeur/v.total)*100 end) AS Statistique,
+        g.nom
+    FROM v_somme_vente_modele v
+    JOIN v_statistique_modele1 vs ON v.id_modele=vs.id_modele
+    JOIN Genre g ON vs.id_genre=g.id 
+    ORDER BY id_modele,id_genre DESC
+);
+
+CREATE OR REPLACE VIEW v_statistique_modele_general AS(
+    SELECT 
+        id_genre,
+        sum(valeur) valeur,
+        nom,
+        (CASE WHEN (SELECT sum(valeur) from v_statistique_modele)=0 then 0 else
+              (sum(valeur)/(SELECT sum(valeur) from v_statistique_modele))*100 end) statistique
+        FROM v_statistique_modele
+    GROUP BY id_genre,nom
+);
+
+CREATE OR REPLACE VIEW v_modele_sans_matiere AS (
+    SELECT  v1.id_type,ty.nom as nom_type,v1.id_look,l.nom as nom_look,v1.id,v1.id_taille,ta.nom as nom_taille
+        FROM modele as v1  
+        JOIN Look l ON l.id_look=v1.id_look
+        JOIN type as ty ON v1.id_type=ty.id_type
+        JOIN taille ta ON ta.id_taille=v1.id_taille  
+);
+>>>>>>> Stashed changes

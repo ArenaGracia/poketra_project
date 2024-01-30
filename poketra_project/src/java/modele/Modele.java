@@ -237,7 +237,11 @@ public class Modele {
     }
 
     public ArrayList<Modele> getModeleBenefice(Connection connection,double min,double max) throws Exception{
+<<<<<<< Updated upstream
         if(max<min) throw new Exception("L'intervallle de valeur est fausse");
+=======
+        if(max<min || min<0) throw new Exception("L'intervallle de valeur est fausse");
+>>>>>>> Stashed changes
         Statement s=null;
         ResultSet res=null;
         boolean isValid=false;
@@ -286,7 +290,11 @@ public class Modele {
                 connection= Dbconnect.dbConnect();
                 isValid=true;
              }
+<<<<<<< Updated upstream
              String sql="SELECT * FROM v_prix_modele";
+=======
+             String sql="SELECT * FROM v_modele_sans_matiere";
+>>>>>>> Stashed changes
              System.out.println(sql);
              s=connection.createStatement();
              res=s.executeQuery(sql);
@@ -297,7 +305,10 @@ public class Modele {
                 Type type=new Type(res.getString("id_type"),res.getString("nom_type"));
                 Look look=new Look(res.getString("id_look"),res.getString("nom_look"));
                 modele.setLook(look);
+<<<<<<< Updated upstream
                 modele.setPrixConfection(res.getDouble("prix_confection"));
+=======
+>>>>>>> Stashed changes
                 modele.setTaille(taille);
                 modele.setTaille(taille);
                 modele.setType(type);
@@ -480,4 +491,81 @@ public class Modele {
          }
         return list;
     }
+<<<<<<< Updated upstream
 }
+=======
+    
+   public ArrayList<Statistique> getStatistique(Connection connection) throws Exception {
+    ArrayList<Statistique> listStats = new ArrayList<>();
+    Statement s = null;
+    ResultSet r = null;
+    Boolean isValid = false;
+    
+    try {
+        if (connection == null) {
+            connection = Dbconnect.dbConnect();
+            isValid = true;
+        }
+
+        String sql = "SELECT * FROM v_statistique_modele WHERE id_modele='" + this.getId() + "'";
+        if(this.getId().equals("all")) sql="SELECT * FROM v_statistique_modele_general";
+        System.out.println("modele.Modele.getStatistique()"+sql);
+        s = connection.createStatement();
+        r = s.executeQuery(sql);
+
+        while (r.next()) {
+            Genre genre=new Genre(r.getString("id_genre"),r.getString("nom"));
+            Statistique stat = new Statistique(genre,r.getDouble("statistique"),r.getDouble("valeur"));
+            listStats.add(stat);
+        }
+
+    } catch (Exception e) {
+        System.err.println(e.getMessage());
+    } finally {
+        if (r != null) r.close();
+        if (s != null) s.close();
+        if (isValid) connection.close();
+    }
+
+    return listStats;
+    }
+    
+       public Modele getModeleParChoix(Connection connection) throws Exception{
+        Statement s=null;
+        ResultSet res=null;
+        boolean isValid=false;
+        Modele modele=null;
+         try {
+             if (connection==null) {
+                connection= Dbconnect.dbConnect();
+                isValid=true;
+             }
+             String sql="SELECT * FROM v_modele_sans_matiere WHERE id LIKE '"+this.getId()+"'";
+             if(this.getId().equals("all")) return this;
+             System.out.println(sql);
+             s=connection.createStatement();
+             res=s.executeQuery(sql);
+             while(res.next()){
+                modele=new Modele();
+                modele.setId(res.getString("id"));
+                Taille taille=new Taille(res.getString("id_taille"),res.getString("nom_taille"));
+                Type type=new Type(res.getString("id_type"),res.getString("nom_type"));
+                Look look=new Look(res.getString("id_look"),res.getString("nom_look"));
+                modele.setLook(look);
+                modele.setTaille(taille);
+                modele.setTaille(taille);
+                modele.setType(type);
+             }
+         } catch (Exception e) {
+            throw e;
+         }
+         finally{
+             if (res !=null) res.close();
+             if (s !=null) s.close();
+             if (isValid) connection.close();
+         }
+         return modele;
+    }
+
+}
+>>>>>>> Stashed changes
