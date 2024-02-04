@@ -18,6 +18,7 @@
 <div class="col-md-12 grid-margin stretch-card">
 <div class="card">
     <div class="card-body">
+        <h4 class="card-title">Etat de stock des matières</h4>
         <form class="form-inline" action="<%= request.getContextPath() %>/stock_matiere" method="post">
             <div class="input-group mb-2 mr-sm-2">
                 <select class="form-control" name="matiere">

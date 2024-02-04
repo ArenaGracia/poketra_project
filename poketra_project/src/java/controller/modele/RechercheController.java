@@ -23,7 +23,17 @@ public class RechercheController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-            request.getRequestDispatcher("./pages/admin/recherchePrix.jsp").forward(request, response);
+        try{
+            if(request.getAttribute("modeles")==null){
+                ArrayList<Modele> listMod= new Modele().getModelePrixConfection(null);
+                System.out.println(listMod.size());
+                request.setAttribute("modeles",listMod);
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally{
+            request.getRequestDispatcher("./pages/admin/listSac.jsp").forward(request, response);
+        }
     }
 
     @Override
@@ -36,7 +46,6 @@ public class RechercheController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        boolean forwarded=false;
         try{
                 double min=Double.valueOf(request.getParameter("min"));
                 double max=Double.valueOf(request.getParameter("max"));
@@ -47,11 +56,9 @@ public class RechercheController extends HttpServlet {
         }
         catch(Exception e){
             request.setAttribute("erreur",e.getMessage());
-            processRequest(request, response);
-            forwarded=true;
         }
         finally{
-            if(!forwarded) request.getRequestDispatcher("./pages/admin/listSac.jsp").forward(request, response);                  
+            processRequest(request, response);
         }
     }
 }

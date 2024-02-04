@@ -17,7 +17,7 @@
     <div class="col-md-6 grid-margin stretch-card">
     <div class="card">
       <div class="card-body">
-            <h4 class="card-title">Liste des Modèles selon le look</h4>
+            <h4 class="card-title">Liste des Modèles selon la matière</h4>
         <form class="form-inline" action="<%= request.getContextPath() %>/list_matiere_produit" method="get">
             <div class="input-group mb-2 mr-sm-2">
                 <select class="form-control" name="matiere">

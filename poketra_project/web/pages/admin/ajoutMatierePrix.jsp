@@ -15,7 +15,7 @@
     <div class="col-md-6 grid-margin stretch-card">
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title">Inserer une matiere pour un prix</h4>
+        <h4 class="card-title">Inserer un prix pour une matiere  </h4>
         <form class="forms-sample" action="<%= request.getContextPath() %>/add_matiere_prix" method="post">
             <div class="input-group mb-2 mr-sm-2">
                 <select class="form-control" name="matiere">

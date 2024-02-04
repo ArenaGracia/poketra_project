@@ -235,6 +235,45 @@ public class Modele {
          }
          return liste;
     }
+    
+    public ArrayList<Modele> getModelePrixConfection(Connection connection) throws Exception{
+        Statement s=null;
+        ResultSet res=null;
+        boolean isValid=false;
+        ArrayList<Modele> liste=new ArrayList<Modele>();
+         try {
+             if (connection==null) {
+                connection= Dbconnect.dbConnect();
+                isValid=true;
+             }
+             String sql="SELECT * FROM v_prix_modele";
+             System.out.println(sql);
+             s=connection.createStatement();
+             res=s.executeQuery(sql);
+             while(res.next()){
+                Modele modele=new Modele();
+                modele.setId(res.getString("id"));
+                Taille taille=new Taille(res.getString("id_taille"),res.getString("nom_taille"));
+                Type type=new Type(res.getString("id_type"),res.getString("nom_type"));
+                Look look=new Look(res.getString("id_look"),res.getString("nom_look"));
+                modele.setLook(look);
+                modele.setPrixConfection(res.getDouble("prix_confection"));
+                modele.setTaille(taille);
+                modele.setTaille(taille);
+                modele.setType(type);
+             
+                liste.add(modele);
+             }
+         } catch (Exception e) {
+            throw e;
+         }
+         finally{
+             if (res !=null) res.close();
+             if (s !=null) s.close();
+             if (isValid) connection.close();
+         }
+         return liste;
+    }
 
     public ArrayList<Modele> getModeleBenefice(Connection connection,double min,double max) throws Exception{
         if(max<min || min<0) throw new Exception("L'intervallle de valeur est fausse");
@@ -248,6 +287,45 @@ public class Modele {
                 isValid=true;
              }
              String sql="SELECT * FROM v_modele_benefice WHERE benefice BETWEEN "+min+" AND "+max+"";
+             System.out.println(sql);
+             s=connection.createStatement();
+             res=s.executeQuery(sql);
+             while(res.next()){
+                Modele modele=new Modele();
+                modele.setId(res.getString("id"));
+                Taille taille=new Taille(res.getString("id_taille"),res.getString("nom_taille"));
+                Type type=new Type(res.getString("id_type"),res.getString("nom_type"));
+                Look look=new Look(res.getString("id_look"),res.getString("nom_look"));
+                modele.setLook(look);
+                modele.setBenefice(res.getDouble("benefice"));
+                modele.setTaille(taille);
+                modele.setTaille(taille);
+                modele.setType(type);
+             
+                liste.add(modele);
+             }
+         } catch (Exception e) {
+            throw e;
+         }
+         finally{
+             if (res !=null) res.close();
+             if (s !=null) s.close();
+             if (isValid) connection.close();
+         }
+         return liste;
+    }
+    
+    public ArrayList<Modele> getAllModeleBenefice(Connection connection) throws Exception{
+        Statement s=null;
+        ResultSet res=null;
+        boolean isValid=false;
+        ArrayList<Modele> liste=new ArrayList<Modele>();
+         try {
+             if (connection==null) {
+                connection= Dbconnect.dbConnect();
+                isValid=true;
+             }
+             String sql="SELECT * FROM v_modele_benefice";
              System.out.println(sql);
              s=connection.createStatement();
              res=s.executeQuery(sql);

@@ -23,8 +23,18 @@ public class RechercheBeneficeController extends HttpServlet {
         protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-            request.getRequestDispatcher("./pages/admin/rechercheBenefice.jsp").forward(request, response);
-    }
+            try{
+                if(request.getAttribute("modeles")==null){
+                    ArrayList<Modele> listMod= new Modele().getAllModeleBenefice(null);
+                    System.out.println(listMod.size());
+                    request.setAttribute("modeles",listMod);
+                }
+            }catch(Exception e){
+                e.printStackTrace();
+            }finally{
+                request.getRequestDispatcher("./pages/admin/listSacByBenefice.jsp").forward(request, response);
+            }    
+        }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -47,11 +57,9 @@ public class RechercheBeneficeController extends HttpServlet {
         }
         catch(Exception e){
             request.setAttribute("erreur",e.getMessage());
-            request.getRequestDispatcher("./pages/admin/rechercheBenefice.jsp").forward(request, response);
-            forwarded=true;
         }
         finally{
-            if(!forwarded) request.getRequestDispatcher("./pages/admin/listSacByBenefice.jsp").forward(request, response);                  
+            processRequest(request, response);
         }
     }
 }
